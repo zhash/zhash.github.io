@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Editor on Hacking Management</title>
-    <link>http://spf13.com/tags/editor/</link>
-    <description>Recent content in Editor on Hacking Management</description>
+    <title>Editor on Free Hacking</title>
+    <link>http://zhash.github.io/tags/editor/</link>
+    <description>Recent content in Editor on Free Hacking</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
     <lastBuildDate>Tue, 10 Apr 2012 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://spf13.com/tags/editor/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://zhash.github.io/tags/editor/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>spf13-vim : Steve Francia&#39;s Vim Distribution</title>
-      <link>http://spf13.com/project/spf13-vim/</link>
+      <link>http://zhash.github.io/project/spf13-vim/</link>
       <pubDate>Tue, 10 Apr 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://spf13.com/project/spf13-vim/</guid>
+      <guid>http://zhash.github.io/project/spf13-vim/</guid>
       <description>
 
 &lt;p&gt;spf13-vim is a distribution of vim plugins and resources for Vim, Gvim and &lt;a href=&#34;http://code.google.com/p/macvim/&#34;&gt;MacVim&lt;/a&gt;.&lt;/p&gt;

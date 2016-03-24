@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hacking Management</title>
-    <link>http://spf13.com/</link>
-    <description>Recent content on Hacking Management</description>
+    <title>Free Hacking</title>
+    <link>http://zhash.github.io/</link>
+    <description>Recent content on Free Hacking</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
     <lastBuildDate>Thu, 24 Mar 2016 15:43:28 +0800</lastBuildDate>
-    <atom:link href="http://spf13.com/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://zhash.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>设计模式在Excel VBA 类中的基础应用</title>
-      <link>http://spf13.com/post/vba-design-pattern/</link>
+      <link>http://zhash.github.io/post/vba-design-pattern/</link>
       <pubDate>Thu, 24 Mar 2016 15:43:28 +0800</pubDate>
       
-      <guid>http://spf13.com/post/vba-design-pattern/</guid>
+      <guid>http://zhash.github.io/post/vba-design-pattern/</guid>
       <description>
 
 &lt;h1 id=&#34;design-pattern-vba:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Design Pattern VBA&lt;/h1&gt;
@@ -76,10 +76,10 @@ End Function
     
     <item>
       <title>Getting Started with Go</title>
-      <link>http://spf13.com/presentation/first-go-app/</link>
+      <link>http://zhash.github.io/presentation/first-go-app/</link>
       <pubDate>Sun, 20 Jul 2014 08:51:33 +0000</pubDate>
       
-      <guid>http://spf13.com/presentation/first-go-app/</guid>
+      <guid>http://zhash.github.io/presentation/first-go-app/</guid>
       <description>
 
 &lt;p&gt;This presentation was given as a Workshop at OSCON 2014.&lt;/p&gt;
@@ -377,10 +377,10 @@ application.&lt;/p&gt;
     
     <item>
       <title>spf13-vim : Steve Francia&#39;s Vim Distribution</title>
-      <link>http://spf13.com/project/spf13-vim/</link>
+      <link>http://zhash.github.io/project/spf13-vim/</link>
       <pubDate>Tue, 10 Apr 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://spf13.com/project/spf13-vim/</guid>
+      <guid>http://zhash.github.io/project/spf13-vim/</guid>
       <description>
 
 &lt;p&gt;spf13-vim is a distribution of vim plugins and resources for Vim, Gvim and &lt;a href=&#34;http://code.google.com/p/macvim/&#34;&gt;MacVim&lt;/a&gt;.&lt;/p&gt;
@@ -859,16 +859,16 @@ convenient location.&lt;/li&gt;
     
     <item>
       <title>Creating your own Symfony2 Bundle</title>
-      <link>http://spf13.com/post/creating-your-own-symfony2-bundle</link>
+      <link>http://zhash.github.io/post/creating-your-own-symfony2-bundle</link>
       <pubDate>Tue, 24 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://spf13.com/post/creating-your-own-symfony2-bundle</guid>
+      <guid>http://zhash.github.io/post/creating-your-own-symfony2-bundle</guid>
       <description>
 
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://spf13.com/media/symfony_ss.png&#34; alt=&#34;symfony&#34; /&gt;
+        &lt;img src=&#34;http://zhash.github.io/media/symfony_ss.png&#34; alt=&#34;symfony&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -952,14 +952,14 @@ Frameworks&lt;/a&gt;&lt;/li&gt;
     
     <item>
       <title>A new page for Google</title>
-      <link>http://spf13.com/post/a-new-page-for-google</link>
+      <link>http://zhash.github.io/post/a-new-page-for-google</link>
       <pubDate>Fri, 21 Jan 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://spf13.com/post/a-new-page-for-google</guid>
+      <guid>http://zhash.github.io/post/a-new-page-for-google</guid>
       <description>
 &lt;figure class=&#34;right half&#34;&gt;
     
-        &lt;img src=&#34;http://spf13.com/media/sergey-brin-and-larry-page.jpg&#34; alt=&#34;Google Management&#34; /&gt;
+        &lt;img src=&#34;http://zhash.github.io/media/sergey-brin-and-larry-page.jpg&#34; alt=&#34;Google Management&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -1042,16 +1042,16 @@ that he could reboot.&lt;/p&gt;
     
     <item>
       <title>Backing up MySQL</title>
-      <link>http://spf13.com/post/backing-up-mysql</link>
+      <link>http://zhash.github.io/post/backing-up-mysql</link>
       <pubDate>Fri, 12 Dec 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://spf13.com/post/backing-up-mysql</guid>
+      <guid>http://zhash.github.io/post/backing-up-mysql</guid>
       <description>
 
 
 &lt;figure class=&#34;third right hid&#34;&gt;
     
-        &lt;img src=&#34;http://spf13.com/media/MySQL.png&#34; alt=&#34;Image via Wikipedia&#34; /&gt;
+        &lt;img src=&#34;http://zhash.github.io/media/MySQL.png&#34; alt=&#34;Image via Wikipedia&#34; /&gt;
     
     
     &lt;figcaption&gt;

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>类模块 on Hacking Management</title>
-    <link>http://spf13.com/tags/%E7%B1%BB%E6%A8%A1%E5%9D%97/</link>
-    <description>Recent content in 类模块 on Hacking Management</description>
+    <title>类模块 on Free Hacking</title>
+    <link>http://zhash.github.io/tags/%E7%B1%BB%E6%A8%A1%E5%9D%97/</link>
+    <description>Recent content in 类模块 on Free Hacking</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
     <lastBuildDate>Thu, 24 Mar 2016 15:43:28 +0800</lastBuildDate>
-    <atom:link href="http://spf13.com/tags/%E7%B1%BB%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://zhash.github.io/tags/%E7%B1%BB%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>设计模式在Excel VBA 类中的基础应用</title>
-      <link>http://spf13.com/post/vba-design-pattern/</link>
+      <link>http://zhash.github.io/post/vba-design-pattern/</link>
       <pubDate>Thu, 24 Mar 2016 15:43:28 +0800</pubDate>
       
-      <guid>http://spf13.com/post/vba-design-pattern/</guid>
+      <guid>http://zhash.github.io/post/vba-design-pattern/</guid>
       <description>
 
 &lt;h1 id=&#34;design-pattern-vba:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Design Pattern VBA&lt;/h1&gt;

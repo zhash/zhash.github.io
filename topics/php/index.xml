@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Php on Hacking Management</title>
-    <link>http://spf13.com/topics/php/</link>
-    <description>Recent content in Php on Hacking Management</description>
+    <title>Php on Free Hacking</title>
+    <link>http://zhash.github.io/topics/php/</link>
+    <description>Recent content in Php on Free Hacking</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
     <lastBuildDate>Tue, 24 May 2011 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://spf13.com/topics/php/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://zhash.github.io/topics/php/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Creating your own Symfony2 Bundle</title>
-      <link>http://spf13.com/post/creating-your-own-symfony2-bundle</link>
+      <link>http://zhash.github.io/post/creating-your-own-symfony2-bundle</link>
       <pubDate>Tue, 24 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://spf13.com/post/creating-your-own-symfony2-bundle</guid>
+      <guid>http://zhash.github.io/post/creating-your-own-symfony2-bundle</guid>
       <description>
 
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://spf13.com/media/symfony_ss.png&#34; alt=&#34;symfony&#34; /&gt;
+        &lt;img src=&#34;http://zhash.github.io/media/symfony_ss.png&#34; alt=&#34;symfony&#34; /&gt;
     
     
 &lt;/figure&gt;

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Systems on Hacking Management</title>
-    <link>http://spf13.com/topics/systems/</link>
-    <description>Recent content in Systems on Hacking Management</description>
+    <title>Systems on Free Hacking</title>
+    <link>http://zhash.github.io/topics/systems/</link>
+    <description>Recent content in Systems on Free Hacking</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
     <lastBuildDate>Fri, 12 Dec 2008 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://spf13.com/topics/systems/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://zhash.github.io/topics/systems/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Backing up MySQL</title>
-      <link>http://spf13.com/post/backing-up-mysql</link>
+      <link>http://zhash.github.io/post/backing-up-mysql</link>
       <pubDate>Fri, 12 Dec 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://spf13.com/post/backing-up-mysql</guid>
+      <guid>http://zhash.github.io/post/backing-up-mysql</guid>
       <description>
 
 
 &lt;figure class=&#34;third right hid&#34;&gt;
     
-        &lt;img src=&#34;http://spf13.com/media/MySQL.png&#34; alt=&#34;Image via Wikipedia&#34; /&gt;
+        &lt;img src=&#34;http://zhash.github.io/media/MySQL.png&#34; alt=&#34;Image via Wikipedia&#34; /&gt;
     
     
     &lt;figcaption&gt;
