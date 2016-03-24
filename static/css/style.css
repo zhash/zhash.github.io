@@ -162,7 +162,7 @@ article ul, article ol {
 
 body {
     font-weight: 200;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Microsoft YaHei', 'Open Sans', sans-serif;
     background-color: #fff
 }
 
@@ -725,7 +725,8 @@ pre {
     background-color: ghostwhite;
     padding: 1em;
     line-height: 1.4;
-    font-size: larger
+    font-size: 3;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header, section, footer, aside, .content {
