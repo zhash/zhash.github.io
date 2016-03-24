@@ -724,9 +724,8 @@ pre {
     margin-bottom: 1em;
     background-color: ghostwhite;
     padding: 1em;
-    line-height: 0;
-    font-size: 1;
-    /*font-family: Arial, Helvetica, sans-serif;*/
+    line-height: 0.5;
+    font-size: large;
 }
 
 header, section, footer, aside, .content {
@@ -993,6 +992,12 @@ body>footer p {
 #next, #prev {
     width: 100% !important;
     padding-top: 2em
+}
+
+code {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: blue;
 }
 
 @media screen and (min-width: 30em) {
