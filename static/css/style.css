@@ -724,9 +724,9 @@ pre {
     margin-bottom: 1em;
     background-color: ghostwhite;
     padding: 1em;
-    line-height: 1.4;
-    font-size: 3;
-    font-family: Arial, Helvetica, sans-serif;
+    line-height: 0;
+    font-size: 1;
+    /*font-family: Arial, Helvetica, sans-serif;*/
 }
 
 header, section, footer, aside, .content {
