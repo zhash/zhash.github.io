@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="keywords" content="Development, php, PHP, Programming, symfony, Symfony2, ">
+
+ 
+<meta property="og:type" content="article"/>
+<meta property="og:description" content=""/>
+<meta property="og:title" content="Creating your own Symfony2 Bundle : spf13.com"/>
+<meta property="og:site_name" content="spf13 is Steve Francia"/>
+<meta property="og:image" content="" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="" />
+<meta property="og:image:height" content="" />
+<meta property="og:url" content="http://spf13.com/post/creating-your-own-symfony2-bundle">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2011-05-24"/>
+<meta property="article:modified_time" content="2011-05-24"/>
+
+
+
+<meta property="article:tag" content="Development">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="symfony">
+<meta property="article:tag" content="Symfony2">
+
+
+
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:site" content="@spf13">
+<meta name="twitter:title" content="Creating your own Symfony2 Bundle : spf13.com">
+<meta name="twitter:creator" content="@spf13">
+<meta name="twitter:description" content="">
+<meta name="twitter:image:src" content="">
+<meta name="twitter:domain" content="spf13.com">
+
+
+
+    <base href="http://spf13.com/">
+    <title> Creating your own Symfony2 Bundle - spf13.com </title>
+    <link rel="canonical" href="http://spf13.com/post/creating-your-own-symfony2-bundle">
+    
+
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/static/css/style.css">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+</head>
+
+<body lang="en" itemscope itemtype="http://schema.org/Article">
+<header id="header">
+    <figure>
+      <a href="/" border=0 id="logolink"><div class="icon-spf13-3" id="logo"> </div></a>
+    </figure>
+    <div id="byline">by Steve Francia</div>
+    <nav id="nav">
+            <ul id="mainnav">
+            <li>
+                <a href="/post/">
+                <span class="icon"> <i aria-hidden="true" class="icon-quill"></i></span>
+                <span> blog </span>
+            </a>
+            </li>
+            <li>
+            <a href="/project/">
+                <span class="icon"> <i aria-hidden="true" class="icon-console"></i></span>
+                <span> code </span>
+            </a>
+            </li>
+            <li>
+            <a href="/presentation/">
+                <span class="icon"> <i aria-hidden="true" class="icon-stats"></i></span>
+                <span> talks </span>
+            </a>
+            </li>
+            <li>
+            <a href="http://stevefrancia.com">
+                <span class="icon"> <i aria-hidden="true" class="icon-13"></i></span>
+                <span> me </span>
+            </a>
+            </li>
+        </ul>
+
+            <ul id="social">
+            <li id="share">
+                <span class="icon icon-bubbles"> </span>
+                <span class="title"> share </span>
+                <div class="dropdown share">
+                    <ul class="social">
+                      <li> <a href="https://twitter.com/intent/tweet?status=Creating%20your%20own%20Symfony2%20Bundle-http%3a%2f%2fspf13.com%2fpost%2fcreating-your-own-symfony2-bundle" target="_blank" title="Follow me on Twitter" class="twitter"><span class="icon icon-twitter"></span>Twitter</a> </li>
+                        <li> <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fspf13.com%2fpost%2fcreating-your-own-symfony2-bundle" target="_blank" title="Join me on Facebook" class="facebook"><span class="icon icon-facebook"></span>Facebook</a> </li>
+                        <li> <a href="https://plus.google.com/share?url=http%3a%2f%2fspf13.com%2fpost%2fcreating-your-own-symfony2-bundle" target="_blank" title="Google+" class="googleplus"><span class="icon icon-google-plus"></span>Google+</a> </li>
+                        <li> <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fspf13.com%2fpost%2fcreating-your-own-symfony2-bundle&title=Creating%20your%20own%20Symfony2%20Bundle&source=spf13" target="_blank" title="LinkedIn" class="linkedin"><span class="icon icon-linkedin"></span>LinkedIn</a> </li>
+                        <li> <a href="http://del.icio.us/post?url=http%3a%2f%2fspf13.com%2fpost%2fcreating-your-own-symfony2-bundle" target="_blank" title="Delicious" class="delicious"><span class="icon icon-delicious"></span>Delicious</a> </li>
+                        <li> <a href="http://www.reddit.com/submit?url=http%3a%2f%2fspf13.com%2fpost%2fcreating-your-own-symfony2-bundle" target="_blank" title="Reddit" class="reddit"><span class="icon icon-reddit"></span>Reddit</a> </li>
+                        <li> <a href="http://www.stumbleupon.com/submit?url=http%3a%2f%2fspf13.com%2fpost%2fcreating-your-own-symfony2-bundle" target="_blank" title="StumbleUpon" class="stumbleupon"><span class="icon icon-stumbleupon"></span>StumbleUpon</a> </li>
+                    </ul>
+                    <span class="subcount">sharing is caring</span>
+                </div>
+            </li>
+            <li id="follow">
+                <span class="icon icon-rocket"> </span>
+                <span class="title"> follow </span>
+                <div class="dropdown follow">
+                    <ul class="social">
+                        <li> <a href="http://feeds.feedburner.com/spf13" target="_blank" title="Subscribe by RSS" class="rss"><span class="icon icon-feed-2"></span>RSS</a> </li>
+                        <li> <a href="http://www.twitter.com/spf13" target="_blank" title="Follow me on Twitter" class="twitter"><span class="icon icon-twitter"></span>Twitter</a> </li>
+                        <li> <a href="http://www.facebook.com/stevefrancia" target="_blank" title="Join me on Facebook" class="facebook"><span class="icon icon-facebook"></span>Facebook</a> </li>
+                        <li> <a href="http://www.linkedin.com/in/stevefrancia" target="_blank" title="LinkedIn" class="linkedin"><span class="icon icon-linkedin"></span>LinkedIn</a> </li>
+                        <li> <a href="http://github.com/spf13" target="_blank" title="GitHub" class="github"><span class="icon icon-github"></span>GitHub</a> </li>
+                        <li> <a href="http://gplus.to/spf13" target="_blank" title="Google+" class="googleplus"><span class="icon icon-google-plus"></span>Google+</a> </li>
+                        <li> <a href="http://slideshare.com/spf13" target="_blank" title="SlideShare" class="slideshare"><span class="icon icon-slideshare"></span>SlideShare</a> </li>
+                    </ul>
+                    <span class="subcount">join 10k+ subscribers &amp; followers</span>
+                </div>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+
+
+<section id="main">
+  <h1 itemprop="name" id="title">Creating your own Symfony2 Bundle</h1>
+  <div>
+        <article itemprop="articleBody" id="content">
+           
+
+
+<figure >
+    
+        <img src="/media/symfony_ss.png" alt="symfony" />
+    
+    
+</figure>
+
+
+
+<p><a href="http://symfony.com/">Symfony2</a> is a great web framework.
+<a href="https://opensky.com">OpenSky</a> is built on this framework and we are one
+of the largest contributors to it. The primary building block for
+Symfony2 is a bundle. Through it’s bundle system Symfony 2.0 achieves a
+level of modularity I haven’t seen in other web frameworks. A bundle
+permits a developer to add functionality to the framework and is the
+best way to develop applications with Symfony2. In this post I’ll show
+you how to create your own bundle.</p>
+
+<h2 id="start-off-with-the-sandbox:b9c1d96372428c1d26afde598b5f3203">Start off with the sandbox</h2>
+
+<p>First install symfony sandbox…</p>
+
+<p>the console can create a basic bundle for you.</p>
+
+<pre><code>&gt; app/console init:bundle Spf13/SteveBundle
+
+Initializing bundle &quot;SteveBundle&quot; in &quot;Sites/sandbox/src/Spf13&quot;
+</code></pre>
+
+<h2 id="tell-symfony2-about-it:b9c1d96372428c1d26afde598b5f3203">Tell Symfony2 about it</h2>
+
+<p>Just having the bundle in place isn’t enough, you need to tell Symfony2
+it exists (and where).</p>
+
+<p>In your <strong>app/AppKernel.php</strong> inside the \$bundles array in
+the<strong><em>registerBundle function</em></strong> add the following line</p>
+
+<pre><code>    new Spf13\SteveBundle\SteveBundle(),
+</code></pre>
+
+<h2 id="routing:b9c1d96372428c1d26afde598b5f3203">Routing</h2>
+
+<p>You also need to define a route and tell Symfony2 where to find the
+routing file. Of the 4 different formats available, I prefer yaml which
+is the default in Symfony2.</p>
+
+<p>in <strong>app/config/routing.yml</strong></p>
+
+<pre><code>steve:
+    resource: @SteveBundle/Resources/config/routing.yml
+</code></pre>
+
+<p>Now create that <strong>routing.yml</strong> file with the following contents.</p>
+
+<pre><code> steve:
+     pattern:  /steve
+          defaults: { _controller: SteveBundle:Default:index }
+</code></pre>
+
+<h2 id="the-controller:b9c1d96372428c1d26afde598b5f3203">The Controller</h2>
+
+<pre><code>The init command has created a controller for you called DefaultController with a basic action (index) which renders a basic php template file.
+</code></pre>
+
+<p>Now visit the page in a browser to confirm everything worked.</p>
+
+<p><strong><a href="http://localhost/[webroot]/app_dev.php/steve">http://localhost/[webroot]/app_dev.php/steve</a></strong></p>
+
+<p>and be greeted by your new bundle.</p>
+
+<h3 id="related-posts:b9c1d96372428c1d26afde598b5f3203">Related Posts</h3>
+
+<ul>
+<li><a href="http://spf13.com/post/getting-started-with-symfony2/">Getting Started with
+Symfony2</a></li>
+<li><a href="http://spf13.com/post/symfony2/">On Symfony2</a></li>
+<li><a href="http://spf13.com/post/creating-a-symfony2-console-command/">Creating a Symfony2 Console
+Command</a></li>
+<li><a href="http://spf13.com/post/next-gen-php-frameworks/">Next Gen PHP
+Frameworks</a></li>
+</ul>
+
+        </article>
+  </div>
+</section>
+
+
+
+<aside id="meta">
+
+    <div>
+        <section id="datecount">
+          <h4 id="date"> Tue May 24, 2011 </h4>
+          <h5 id="wc"> 300 Words </h5>
+          <h5 id="readtime"> Read in about 2 Min </h5>
+        </section>
+        <ul id="categories">
+          
+            <li><a href="http://spf13.com//topics/development">Development</a> </li>
+          
+            <li><a href="http://spf13.com//topics/php">php</a> </li>
+          
+        </ul>
+        <ul id="tags">
+          
+            <li> <a href="http://spf13.com//tags/php">PHP</a> </li>
+          
+            <li> <a href="http://spf13.com//tags/programming">Programming</a> </li>
+          
+            <li> <a href="http://spf13.com//tags/symfony">symfony</a> </li>
+          
+            <li> <a href="http://spf13.com//tags/symfony2">Symfony2</a> </li>
+          
+        </ul>
+    </div>
+
+    <div>
+        <section id="prev">
+            &nbsp;<a class="previous" href="http://spf13.com/project/spf13-vim/"><i class="icon-arrow-left"></i> spf13-vim : Steve Francia&#39;s Vim Distribution</a><br>
+        </section><section id="next">
+            &nbsp;<a class="next" href="http://spf13.com/post/a-new-page-for-google">A new page for Google <i class="icon-arrow-right"></i></a>
+        </section>
+    </div>
+
+    <div>
+        <section id="author">
+             <h4>About the Author:</h4> 
+            <p>
+            Steve Francia has been responsible for two of the largest commercial open
+            source projects as the current Chief Operator of the <a href="http://docker.com">Docker Project</a> and the
+            former Chief Developer Advocate of <a href="http://mongodb.com">MongoDB</a>. Steve has also run some of the top
+            community-based open source projects: <a href="http://vim.spf13.com">spf13-vim</a>, <a href="http://gohugo.io">Hugo</a>, <a href="http://github.com/spf13/cobra">Cobra</a> & <a href="http://github.com/spf13/viper">Viper</a>
+            </p><p>
+            He loves open source and is thrilled to be able to work on it full-time and
+            then some. In writing, Steve tweets as <a href="http://twitter.com/spf13">@spf13</a>, 
+            codes on <a href="http://github.com/spf13">GitHub</a>, 
+            blogs at <a href="http://spf13.com">spf13.com</a>,
+            connects on <a href="http://www.linkedin.com/in/stevefrancia">LinkedIn</a>,
+            ocassionally posts on <a title="Author: Steve Francia on Google+" rel="author" href="https://plus.google.com/+SteveFrancia/posts?rel=author" target="_blank">Google+</a> 
+            and has written a few books for O'Reilly.
+            </p><p>
+            In person, he enjoys giving talks and workshops and spending time with the
+            developer community around the world. When not coding, he is usually having fun
+            outdoors with his wife and four children.
+            </p>
+        </section>
+    </div>
+
+</aside>
+
+<meta itemprop="wordCount" content="261">
+<meta itemprop="datePublished" content="2011-05-24">
+<meta itemprop="url" content="http://spf13.com/post/creating-your-own-symfony2-bundle">
+
+
+<aside id=comments>
+    <div><h2> Comments </h2></div>
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'spf13';
+    var disqus_identifier = '1377 http:\/\/spf13.com\/?p=1377';
+    var disqus_title = 'creating your own symfony2 bundle';
+    var disqus_url = 'http:\/\/spf13.com\/post\/creating-your-own-symfony2-bundle\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</aside>
+
+<footer>
+  <div>
+    <p>
+    &copy; 2013-14 <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Steve Francia.</span></span>
+    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>; 
+    please attribute properly and link back. <br>
+    Powered by <a href="http://gohugo.io">Hugo</a>.
+        Hosted by <a href="http://servergrove.com">ServerGrove</a>.
+    </p>
+  </div>
+</footer>
+<script type="text/javascript">
+(function(){var j=function(a,b){return window.getComputedStyle?getComputedStyle(a).getPropertyValue(b):a.currentStyle[b]};var k=function(a,b,c){if(a.addEventListener)a.addEventListener(b,c,false);else a.attachEvent('on'+b,c)};var l=function(a,b){for(key in b)if(b.hasOwnProperty(key))a[key]=b[key];return a};window.fitText=function(d,e,f){var g=l({'minFontSize':-1/0,'maxFontSize':1/0},f);var h=function(a){var b=e||1;var c=function(){a.style.fontSize=Math.max(Math.min(a.clientWidth/(b*10),parseFloat(g.maxFontSize)),parseFloat(g.minFontSize))+'px'};c();k(window,'resize',c)};if(d.length)for(var i=0;i<d.length;i++)h(d[i]);else h(d);return d}})();
+fitText(document.getElementById('title'), 1)
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-7131036-1', 'spf13.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
+

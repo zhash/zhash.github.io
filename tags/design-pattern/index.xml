@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Design Pattern on Hacking Management</title>
+    <link>http://spf13.com/tags/design-pattern/</link>
+    <description>Recent content in Design Pattern on Hacking Management</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Thu, 24 Mar 2016 15:43:28 +0800</lastBuildDate>
+    <atom:link href="http://spf13.com/tags/design-pattern/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>设计模式在Excel VBA 类中的基础应用</title>
+      <link>http://spf13.com/post/vba-design-pattern/</link>
+      <pubDate>Thu, 24 Mar 2016 15:43:28 +0800</pubDate>
+      
+      <guid>http://spf13.com/post/vba-design-pattern/</guid>
+      <description>
+
+&lt;h1 id=&#34;design-pattern-vba:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Design Pattern VBA&lt;/h1&gt;
+
+&lt;p&gt;跟很多玩VBA朋友一样,对于VBA的类一直摸不着头脑,觉得它的应用貌似不如想象中的强大,
+直到阅读了《设计模式》的相关书籍后,才有一点心得,分享如下,当然设计模式的思想概念
+什么的不会再本文中展开叙述的. 同时关于VBA类的基础知识,这边也不赘述了,相关资料也
+有许多. 看书的直接后果导致个人目前认为:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;技术到最后,褪去华丽的技巧,剩下能闪烁的还是思想.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;scene:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Scene&lt;/h2&gt;
+
+&lt;p&gt;个人在实际工作中运用最多的场景是:打开一个数据源,取出相关数据,根据不同的需求加工
+整理后输出.针对上面的场景,我们来进行相关的设计,至于里面用到了哪种或哪些设计模式
+大家有兴趣可以自行研究. 这里并非卖关子,只是想抛砖引玉,让大家保持好奇心,去深入了
+解设计模式.&lt;/p&gt;
+
+&lt;p&gt;如果强行说要去弄类的各种属性,也只不过是把数据源中的各个标题字段搞一遍而已,貌似是
+画蛇添足, 所以我一般不搞,直接就是上类的方法.&lt;/p&gt;
+
+&lt;h2 id=&#34;datesource:3482b2326563ae3120c25165b1c2f20a&#34;&gt;DateSource&lt;/h2&gt;
+
+&lt;p&gt;数据源的类型包括文本文件、excel文件、各种数据库(Access,Oracle,SqlServer……)&lt;/p&gt;
+
+&lt;p&gt;很显然我们要一个Open的方法来打开数据源,这边假定数据源是excel文件,所以定义了一个方法叫OpenWorkBook()&lt;/p&gt;
+
+&lt;p&gt;很多情况下,数据源不只一个excel文件而是一批,我们需要一个数组存放数据源的名称,所以定义了一个方法叫FileArray()&lt;/p&gt;
+
+&lt;p&gt;更经常的情况是我们会把所有的excel表放在同一个文件夹中,这样上面FileArray()方法需要一个路径,所以定义一个方法叫FolderPath()&lt;/p&gt;
+
+&lt;p&gt;打开数据源取完数后,我们要关闭数据源,所以需要一个方法CloseWorkbook()&lt;/p&gt;
+
+&lt;p&gt;通常我还会定义一个方法用来释放程序过程中用到的对象FreeObj()&lt;/p&gt;
+
+&lt;h2 id=&#34;interface:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Interface&lt;/h2&gt;
+
+&lt;p&gt;根据以上的描述一个通用接口类的方法,基本上就都出来了,汇总如下:&lt;/p&gt;
+
+&lt;p&gt;接口类的名称为:INormal&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Public Function OpenWorkbook()
+End Function
+
+Public Function FileArray()
+End Function
+
+Public Function CloseWorkbook()
+End Function
+
+Public Function FreeObj()
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

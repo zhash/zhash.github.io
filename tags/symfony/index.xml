@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Symfony on Hacking Management</title>
+    <link>http://spf13.com/tags/symfony/</link>
+    <description>Recent content in Symfony on Hacking Management</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 24 May 2011 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://spf13.com/tags/symfony/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Creating your own Symfony2 Bundle</title>
+      <link>http://spf13.com/post/creating-your-own-symfony2-bundle</link>
+      <pubDate>Tue, 24 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://spf13.com/post/creating-your-own-symfony2-bundle</guid>
+      <description>
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://spf13.com/media/symfony_ss.png&#34; alt=&#34;symfony&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;&lt;a href=&#34;http://symfony.com/&#34;&gt;Symfony2&lt;/a&gt; is a great web framework.
+&lt;a href=&#34;https://opensky.com&#34;&gt;OpenSky&lt;/a&gt; is built on this framework and we are one
+of the largest contributors to it. The primary building block for
+Symfony2 is a bundle. Through it’s bundle system Symfony 2.0 achieves a
+level of modularity I haven’t seen in other web frameworks. A bundle
+permits a developer to add functionality to the framework and is the
+best way to develop applications with Symfony2. In this post I’ll show
+you how to create your own bundle.&lt;/p&gt;
+
+&lt;h2 id=&#34;start-off-with-the-sandbox:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Start off with the sandbox&lt;/h2&gt;
+
+&lt;p&gt;First install symfony sandbox…&lt;/p&gt;
+
+&lt;p&gt;the console can create a basic bundle for you.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; app/console init:bundle Spf13/SteveBundle
+
+Initializing bundle &amp;quot;SteveBundle&amp;quot; in &amp;quot;Sites/sandbox/src/Spf13&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;tell-symfony2-about-it:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Tell Symfony2 about it&lt;/h2&gt;
+
+&lt;p&gt;Just having the bundle in place isn’t enough, you need to tell Symfony2
+it exists (and where).&lt;/p&gt;
+
+&lt;p&gt;In your &lt;strong&gt;app/AppKernel.php&lt;/strong&gt; inside the \$bundles array in
+the&lt;strong&gt;&lt;em&gt;registerBundle function&lt;/em&gt;&lt;/strong&gt; add the following line&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    new Spf13\SteveBundle\SteveBundle(),
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;routing:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Routing&lt;/h2&gt;
+
+&lt;p&gt;You also need to define a route and tell Symfony2 where to find the
+routing file. Of the 4 different formats available, I prefer yaml which
+is the default in Symfony2.&lt;/p&gt;
+
+&lt;p&gt;in &lt;strong&gt;app/config/routing.yml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;steve:
+    resource: @SteveBundle/Resources/config/routing.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now create that &lt;strong&gt;routing.yml&lt;/strong&gt; file with the following contents.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; steve:
+     pattern:  /steve
+          defaults: { _controller: SteveBundle:Default:index }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;the-controller:b9c1d96372428c1d26afde598b5f3203&#34;&gt;The Controller&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;The init command has created a controller for you called DefaultController with a basic action (index) which renders a basic php template file.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now visit the page in a browser to confirm everything worked.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://localhost/[webroot]/app_dev.php/steve&#34;&gt;http://localhost/[webroot]/app_dev.php/steve&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;and be greeted by your new bundle.&lt;/p&gt;
+
+&lt;h3 id=&#34;related-posts:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Related Posts&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/getting-started-with-symfony2/&#34;&gt;Getting Started with
+Symfony2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/symfony2/&#34;&gt;On Symfony2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/creating-a-symfony2-console-command/&#34;&gt;Creating a Symfony2 Console
+Command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/next-gen-php-frameworks/&#34;&gt;Next Gen PHP
+Frameworks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

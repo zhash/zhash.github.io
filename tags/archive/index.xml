@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Archive on Hacking Management</title>
+    <link>http://spf13.com/tags/archive/</link>
+    <description>Recent content in Archive on Hacking Management</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 12 Dec 2008 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://spf13.com/tags/archive/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Backing up MySQL</title>
+      <link>http://spf13.com/post/backing-up-mysql</link>
+      <pubDate>Fri, 12 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://spf13.com/post/backing-up-mysql</guid>
+      <description>
+
+
+&lt;figure class=&#34;third right hid&#34;&gt;
+    
+        &lt;img src=&#34;http://spf13.com/media/MySQL.png&#34; alt=&#34;Image via Wikipedia&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;p&gt;
+        Image via Wikipedia
+        
+            
+        
+        &lt;/p&gt; 
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;I don’t know very many people that haven’t been devastated by the loss
+of data… Yet I am baffled that millions of professional IT workers still
+ignore backing up their data. Since computers are great at doing
+repetitive things
+like &lt;a href=&#34;http://en.wikipedia.org/wiki/Backup&#34; title=&#34;Backup&#34;&gt;backups&lt;/a&gt;.. why not
+spend 20 minutes setting up your machine to backup your files for you.
+This guide will be specific to &lt;a href=&#34;http://www.mysql.com&#34; title=&#34;MySQL&#34;&gt;mysql&lt;/a&gt; to
+create a local copy of the backup. Then read my other guide about
+copying files securely to a remote backup server for the 2nd part.&lt;/p&gt;
+
+&lt;p&gt;Hopefully you are using *nix. If so then you have some great utilities
+already available to you.&lt;a href=&#34;http://rsync.samba.org/&#34; title=&#34;Rsync&#34;&gt;Rsync&lt;/a&gt;,
+SSH, &lt;a href=&#34;http://en.wikipedia.org/wiki/Tar_%28band%29 &amp;quot;Tar (band&#34;&gt;Tar&lt;/a&gt;&amp;rdquo;),
+Bash and Cron can produce elegant solutions.&lt;/p&gt;
+
+&lt;h1 id=&#34;the-setup:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;The Setup&lt;/h1&gt;
+
+&lt;h2 id=&#34;create-backup-user:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Create Backup User&lt;/h2&gt;
+
+&lt;p&gt;First thing to do is to create a &lt;strong&gt;Read Only&lt;/strong&gt; mysql user to perform the
+backups. Optionally a second recovery user can also be created. It isn’t
+advisable to perform backups as the root user as common sense and proper
+procedures dictate that a user should always have the minimum privilages
+necessary to accomplish the job.&lt;/p&gt;
+
+&lt;p&gt;Example: Run the following command at the mysql prompt when logged in as
+root to grant the minimal privilages needed.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;GRANT LOCK TABLES, SELECT, FILE, RELOAD, SUPER ON *.* TO &#39;db-backup&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;really-long.and Varied p@$$wrd&#39;;&lt;/code&gt;{.code}&lt;/p&gt;
+
+&lt;h2 id=&#34;install-your-backup-script:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Install Your Backup Script&lt;/h2&gt;
+
+&lt;p&gt;There is a fantastic mysql backup script that is really easy to use and
+simply wraps the mysql backup utilities with nice features like daily,
+weekly, and monthly backups. Cycling and optionally emailing a summary
+of the backup.&lt;/p&gt;
+
+&lt;h3 id=&#34;download:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Download&lt;/h3&gt;
+
+&lt;p&gt;Go here to
+download &lt;a href=&#34;http://sourceforge.net/projects/automysqlbackup/&#34;&gt;automysqlbackup&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;install:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Install&lt;/h3&gt;
+
+&lt;p&gt;Install it by copying it to a good location. I use /usr/local/sbin/ or
+/usr/local/bin depending on if I am an admin on the system, or just a
+user on a shared host.&lt;/p&gt;
+
+&lt;p&gt;make sure to set the permissions as executable.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;# chmod +x automysqlbackup&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;configure:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Configure&lt;/h3&gt;
+
+&lt;p&gt;Simply edit the shell script with your favorite editor. If you don’t
+have one, permit me to recommend VIM&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# vim /usr/local/sbin/automysqlbackup.sh
+
+#===================================================================== 
+# Set the following variables to your system needs 
+# (Detailed instructions below variables) 
+#=====================================================================
+# Username to access the MySQL server e.g. dbuser 
+USERNAME=db-backup
+# Username to access the MySQL server e.g. 
+password PASSWORD=that-secure password set earlier
+# Host name (or IP address) of MySQL server e.g localhost 
+DBHOST=localhost
+# List of DBNAMES for Daily/Weekly Backup e.g. &amp;quot;DB1 DB2 DB3&amp;quot; 
+DBNAMES=&amp;quot;all&amp;quot; 
+# OR NAME THEM WITH SPACES SEPARATING
+# Backup directory location e.g /backups 
+BACKUPDIR=&amp;quot;/usr/local/backup/mysql&amp;quot; 
+# I LIKE THIS DIRECTORY, JUST MAKE SURE PERMISSIONS ARE SET PROPERLY
+# Mail setup 
+# What would you like to be mailed to you? 
+# - log : send only log file 
+# - files : send log file and sql files as attachments (see docs) 
+# - stdout : will simply output the log to the screen if run manually. 
+# - quiet : Only send logs if an error occurs to the MAILADDR. 
+MAILCONTENT=&amp;quot;stdout&amp;quot;
+# Set the maximum allowed email size in k. (4000 = approx 5MB email [see docs]) 
+MAXATTSIZE=&amp;quot;4000&amp;quot;
+# Email Address to send mail to? (
+MAILADDR=&amp;quot;email@address.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;setup-cron-to-run-nightly:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Setup Cron to run nightly&lt;/h2&gt;
+
+&lt;p&gt;create a new file in /etc/cron.daily/ and place these contents into it..&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# vim /etc/cron.daily/mysql-backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;#!/bin/bash /usr/local/bin/automysqlbackup 2&amp;gt;&amp;amp;1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Make sure it is executable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# chmod +x /etc/cron.daily/mysql-backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I usually test it simply run that cron file from the command line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# /etc/cron.daily/mysql-backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Remember that a backup is only as good as it&amp;rsquo;s restore. What we have done here should be considered
+the bare minimum and will result in some data loss if it&amp;rsquo;s needed.. How much data loss?
+Up to one days worth of changes as that&amp;rsquo;s how frequently we are backing up things.
+If we wanted to shrink that window then run the script more often, but recognize that cost for this
+is the data retained will grow in size.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

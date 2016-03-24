@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Hacking Management</title>
+    <link>http://spf13.com/post/</link>
+    <description>Recent content in Posts on Hacking Management</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Thu, 24 Mar 2016 15:43:28 +0800</lastBuildDate>
+    <atom:link href="http://spf13.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>设计模式在Excel VBA 类中的基础应用</title>
+      <link>http://spf13.com/post/vba-design-pattern/</link>
+      <pubDate>Thu, 24 Mar 2016 15:43:28 +0800</pubDate>
+      
+      <guid>http://spf13.com/post/vba-design-pattern/</guid>
+      <description>
+
+&lt;h1 id=&#34;design-pattern-vba:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Design Pattern VBA&lt;/h1&gt;
+
+&lt;p&gt;跟很多玩VBA朋友一样,对于VBA的类一直摸不着头脑,觉得它的应用貌似不如想象中的强大,
+直到阅读了《设计模式》的相关书籍后,才有一点心得,分享如下,当然设计模式的思想概念
+什么的不会再本文中展开叙述的. 同时关于VBA类的基础知识,这边也不赘述了,相关资料也
+有许多. 看书的直接后果导致个人目前认为:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;技术到最后,褪去华丽的技巧,剩下能闪烁的还是思想.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;scene:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Scene&lt;/h2&gt;
+
+&lt;p&gt;个人在实际工作中运用最多的场景是:打开一个数据源,取出相关数据,根据不同的需求加工
+整理后输出.针对上面的场景,我们来进行相关的设计,至于里面用到了哪种或哪些设计模式
+大家有兴趣可以自行研究. 这里并非卖关子,只是想抛砖引玉,让大家保持好奇心,去深入了
+解设计模式.&lt;/p&gt;
+
+&lt;p&gt;如果强行说要去弄类的各种属性,也只不过是把数据源中的各个标题字段搞一遍而已,貌似是
+画蛇添足, 所以我一般不搞,直接就是上类的方法.&lt;/p&gt;
+
+&lt;h2 id=&#34;datesource:3482b2326563ae3120c25165b1c2f20a&#34;&gt;DateSource&lt;/h2&gt;
+
+&lt;p&gt;数据源的类型包括文本文件、excel文件、各种数据库(Access,Oracle,SqlServer……)&lt;/p&gt;
+
+&lt;p&gt;很显然我们要一个Open的方法来打开数据源,这边假定数据源是excel文件,所以定义了一个方法叫OpenWorkBook()&lt;/p&gt;
+
+&lt;p&gt;很多情况下,数据源不只一个excel文件而是一批,我们需要一个数组存放数据源的名称,所以定义了一个方法叫FileArray()&lt;/p&gt;
+
+&lt;p&gt;更经常的情况是我们会把所有的excel表放在同一个文件夹中,这样上面FileArray()方法需要一个路径,所以定义一个方法叫FolderPath()&lt;/p&gt;
+
+&lt;p&gt;打开数据源取完数后,我们要关闭数据源,所以需要一个方法CloseWorkbook()&lt;/p&gt;
+
+&lt;p&gt;通常我还会定义一个方法用来释放程序过程中用到的对象FreeObj()&lt;/p&gt;
+
+&lt;h2 id=&#34;interface:3482b2326563ae3120c25165b1c2f20a&#34;&gt;Interface&lt;/h2&gt;
+
+&lt;p&gt;根据以上的描述一个通用接口类的方法,基本上就都出来了,汇总如下:&lt;/p&gt;
+
+&lt;p&gt;接口类的名称为:INormal&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Public Function OpenWorkbook()
+End Function
+
+Public Function FileArray()
+End Function
+
+Public Function CloseWorkbook()
+End Function
+
+Public Function FreeObj()
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating your own Symfony2 Bundle</title>
+      <link>http://spf13.com/post/creating-your-own-symfony2-bundle</link>
+      <pubDate>Tue, 24 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://spf13.com/post/creating-your-own-symfony2-bundle</guid>
+      <description>
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://spf13.com/media/symfony_ss.png&#34; alt=&#34;symfony&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;&lt;a href=&#34;http://symfony.com/&#34;&gt;Symfony2&lt;/a&gt; is a great web framework.
+&lt;a href=&#34;https://opensky.com&#34;&gt;OpenSky&lt;/a&gt; is built on this framework and we are one
+of the largest contributors to it. The primary building block for
+Symfony2 is a bundle. Through it’s bundle system Symfony 2.0 achieves a
+level of modularity I haven’t seen in other web frameworks. A bundle
+permits a developer to add functionality to the framework and is the
+best way to develop applications with Symfony2. In this post I’ll show
+you how to create your own bundle.&lt;/p&gt;
+
+&lt;h2 id=&#34;start-off-with-the-sandbox:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Start off with the sandbox&lt;/h2&gt;
+
+&lt;p&gt;First install symfony sandbox…&lt;/p&gt;
+
+&lt;p&gt;the console can create a basic bundle for you.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; app/console init:bundle Spf13/SteveBundle
+
+Initializing bundle &amp;quot;SteveBundle&amp;quot; in &amp;quot;Sites/sandbox/src/Spf13&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;tell-symfony2-about-it:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Tell Symfony2 about it&lt;/h2&gt;
+
+&lt;p&gt;Just having the bundle in place isn’t enough, you need to tell Symfony2
+it exists (and where).&lt;/p&gt;
+
+&lt;p&gt;In your &lt;strong&gt;app/AppKernel.php&lt;/strong&gt; inside the \$bundles array in
+the&lt;strong&gt;&lt;em&gt;registerBundle function&lt;/em&gt;&lt;/strong&gt; add the following line&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    new Spf13\SteveBundle\SteveBundle(),
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;routing:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Routing&lt;/h2&gt;
+
+&lt;p&gt;You also need to define a route and tell Symfony2 where to find the
+routing file. Of the 4 different formats available, I prefer yaml which
+is the default in Symfony2.&lt;/p&gt;
+
+&lt;p&gt;in &lt;strong&gt;app/config/routing.yml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;steve:
+    resource: @SteveBundle/Resources/config/routing.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now create that &lt;strong&gt;routing.yml&lt;/strong&gt; file with the following contents.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; steve:
+     pattern:  /steve
+          defaults: { _controller: SteveBundle:Default:index }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;the-controller:b9c1d96372428c1d26afde598b5f3203&#34;&gt;The Controller&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;The init command has created a controller for you called DefaultController with a basic action (index) which renders a basic php template file.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now visit the page in a browser to confirm everything worked.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://localhost/[webroot]/app_dev.php/steve&#34;&gt;http://localhost/[webroot]/app_dev.php/steve&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;and be greeted by your new bundle.&lt;/p&gt;
+
+&lt;h3 id=&#34;related-posts:b9c1d96372428c1d26afde598b5f3203&#34;&gt;Related Posts&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/getting-started-with-symfony2/&#34;&gt;Getting Started with
+Symfony2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/symfony2/&#34;&gt;On Symfony2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/creating-a-symfony2-console-command/&#34;&gt;Creating a Symfony2 Console
+Command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://spf13.com/post/next-gen-php-frameworks/&#34;&gt;Next Gen PHP
+Frameworks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A new page for Google</title>
+      <link>http://spf13.com/post/a-new-page-for-google</link>
+      <pubDate>Fri, 21 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://spf13.com/post/a-new-page-for-google</guid>
+      <description>
+&lt;figure class=&#34;right half&#34;&gt;
+    
+        &lt;img src=&#34;http://spf13.com/media/sergey-brin-and-larry-page.jpg&#34; alt=&#34;Google Management&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;With a single tweet Google CEO Eric Schmidt announce a shift at the top
+of the search giant. The timing of this announcement can’t help but call
+to question if someone more youthful is needed at the helm to hold off
+the tidal waves of Apple, Microsoft and Facebook.&lt;/p&gt;
+
+&lt;p&gt;Odd that Google chose twitter and a blog post to convey this instead of
+more traditional methods.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;“Day-to-day adult supervision no longer needed!” Schmidt wrote on his
+Twitter account moments after Google dropped the bombshell that
+upstaged its fourth-quarter earnings. Schmidt, 55, will still be
+available to advise Page, 37, and Google’s other 37-year-old founder,
+Sergey Brin, as the company’s executive chairman. &lt;em&gt;via
+&lt;a href=&#34;http://www.msnbc.msn.com/id/41179589/ns/business-us_business/&#34;&gt;msnbc&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Schmidt is referencing an interview with Charlie Rose on PBS from when
+he first took the helm where Page and Brin explain why he took the role
+as CEO.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;“Parental supervision, to be honest,” says Brin.&lt;/p&gt;
+
+&lt;p&gt;Rose laughs hard, and asks Page, “Do you agree with that – you guys
+need adult supervision?”&lt;/p&gt;
+
+&lt;p&gt;Page: “I don’t know if I’d say need, but it’s really nice to have.”&lt;/p&gt;
+
+&lt;p&gt;Rose: “It’s beneficial.”&lt;/p&gt;
+
+&lt;p&gt;Page: “Yeah.”&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;via
+&lt;a href=&#34;http://blogs.wsj.com/venturecapital/2011/01/20/about-eric-schmidts-adult-supervision-comment/&#34;&gt;WSJ&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Eric Schmidt steps down just as  Mark Zuckerberg was named &lt;a href=&#34;http://www.blackweb20.com/2010/12/15/mark-zuckerberg-named-person-of-the-year-by-time/&#34;&gt;Person of
+the Year by
+Time&lt;/a&gt;and
+Jobs was named &lt;a href=&#34;http://www.blackweb20.com/2010/12/24/steve-jobs-person-of-the-year-according-to-financial-times/&#34;&gt;Person of the Year by Financial
+Times&lt;/a&gt;.
+It calls to question if a more dynamic youthful leader was needed and if
+Page can step up and be that.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;via&lt;a href=&#34;http://googleblog.blogspot.com/2011/01/update-from-chairman.html&#34;&gt;Google
+Blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Update:&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;On the New Yorker Ken Auletta sheds some light on &lt;a href=&#34;http://www.newyorker.com/online/blogs/newsdesk/2011/01/eric-schmidt-google.html&#34;&gt;why Eric Schmidt is
+stepping down as Google’s
+CEO&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Schmidt, according to associates, lost some energy and focus after
+losing the China decision. At the same time, Google was becoming
+defensive. All of their social-network efforts had faltered. Facebook
+had replaced them as the hot tech company, the place vital engineers
+wanted to work. Complaints about Google bureaucracy intensified.
+Governments around the world were lobbing grenades at Google over
+privacy, copyright, and size issues. The “don’t be evil” brand was
+getting tarnished, and the founders were restive. Schmidt started to
+think of departing. Nudged by a board-member friend and an outside
+advisor that he had to re-energize himself, he decided after Labor Day
+that he could reboot.&lt;/p&gt;
+
+&lt;p&gt;He couldn’t. By the end of the year, he was ready to jump on his own.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Apparently Facebook and youth had quite a bit to do with it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backing up MySQL</title>
+      <link>http://spf13.com/post/backing-up-mysql</link>
+      <pubDate>Fri, 12 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://spf13.com/post/backing-up-mysql</guid>
+      <description>
+
+
+&lt;figure class=&#34;third right hid&#34;&gt;
+    
+        &lt;img src=&#34;http://spf13.com/media/MySQL.png&#34; alt=&#34;Image via Wikipedia&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;p&gt;
+        Image via Wikipedia
+        
+            
+        
+        &lt;/p&gt; 
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;I don’t know very many people that haven’t been devastated by the loss
+of data… Yet I am baffled that millions of professional IT workers still
+ignore backing up their data. Since computers are great at doing
+repetitive things
+like &lt;a href=&#34;http://en.wikipedia.org/wiki/Backup&#34; title=&#34;Backup&#34;&gt;backups&lt;/a&gt;.. why not
+spend 20 minutes setting up your machine to backup your files for you.
+This guide will be specific to &lt;a href=&#34;http://www.mysql.com&#34; title=&#34;MySQL&#34;&gt;mysql&lt;/a&gt; to
+create a local copy of the backup. Then read my other guide about
+copying files securely to a remote backup server for the 2nd part.&lt;/p&gt;
+
+&lt;p&gt;Hopefully you are using *nix. If so then you have some great utilities
+already available to you.&lt;a href=&#34;http://rsync.samba.org/&#34; title=&#34;Rsync&#34;&gt;Rsync&lt;/a&gt;,
+SSH, &lt;a href=&#34;http://en.wikipedia.org/wiki/Tar_%28band%29 &amp;quot;Tar (band&#34;&gt;Tar&lt;/a&gt;&amp;rdquo;),
+Bash and Cron can produce elegant solutions.&lt;/p&gt;
+
+&lt;h1 id=&#34;the-setup:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;The Setup&lt;/h1&gt;
+
+&lt;h2 id=&#34;create-backup-user:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Create Backup User&lt;/h2&gt;
+
+&lt;p&gt;First thing to do is to create a &lt;strong&gt;Read Only&lt;/strong&gt; mysql user to perform the
+backups. Optionally a second recovery user can also be created. It isn’t
+advisable to perform backups as the root user as common sense and proper
+procedures dictate that a user should always have the minimum privilages
+necessary to accomplish the job.&lt;/p&gt;
+
+&lt;p&gt;Example: Run the following command at the mysql prompt when logged in as
+root to grant the minimal privilages needed.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;GRANT LOCK TABLES, SELECT, FILE, RELOAD, SUPER ON *.* TO &#39;db-backup&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;really-long.and Varied p@$$wrd&#39;;&lt;/code&gt;{.code}&lt;/p&gt;
+
+&lt;h2 id=&#34;install-your-backup-script:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Install Your Backup Script&lt;/h2&gt;
+
+&lt;p&gt;There is a fantastic mysql backup script that is really easy to use and
+simply wraps the mysql backup utilities with nice features like daily,
+weekly, and monthly backups. Cycling and optionally emailing a summary
+of the backup.&lt;/p&gt;
+
+&lt;h3 id=&#34;download:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Download&lt;/h3&gt;
+
+&lt;p&gt;Go here to
+download &lt;a href=&#34;http://sourceforge.net/projects/automysqlbackup/&#34;&gt;automysqlbackup&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;install:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Install&lt;/h3&gt;
+
+&lt;p&gt;Install it by copying it to a good location. I use /usr/local/sbin/ or
+/usr/local/bin depending on if I am an admin on the system, or just a
+user on a shared host.&lt;/p&gt;
+
+&lt;p&gt;make sure to set the permissions as executable.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;# chmod +x automysqlbackup&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;configure:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Configure&lt;/h3&gt;
+
+&lt;p&gt;Simply edit the shell script with your favorite editor. If you don’t
+have one, permit me to recommend VIM&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# vim /usr/local/sbin/automysqlbackup.sh
+
+#===================================================================== 
+# Set the following variables to your system needs 
+# (Detailed instructions below variables) 
+#=====================================================================
+# Username to access the MySQL server e.g. dbuser 
+USERNAME=db-backup
+# Username to access the MySQL server e.g. 
+password PASSWORD=that-secure password set earlier
+# Host name (or IP address) of MySQL server e.g localhost 
+DBHOST=localhost
+# List of DBNAMES for Daily/Weekly Backup e.g. &amp;quot;DB1 DB2 DB3&amp;quot; 
+DBNAMES=&amp;quot;all&amp;quot; 
+# OR NAME THEM WITH SPACES SEPARATING
+# Backup directory location e.g /backups 
+BACKUPDIR=&amp;quot;/usr/local/backup/mysql&amp;quot; 
+# I LIKE THIS DIRECTORY, JUST MAKE SURE PERMISSIONS ARE SET PROPERLY
+# Mail setup 
+# What would you like to be mailed to you? 
+# - log : send only log file 
+# - files : send log file and sql files as attachments (see docs) 
+# - stdout : will simply output the log to the screen if run manually. 
+# - quiet : Only send logs if an error occurs to the MAILADDR. 
+MAILCONTENT=&amp;quot;stdout&amp;quot;
+# Set the maximum allowed email size in k. (4000 = approx 5MB email [see docs]) 
+MAXATTSIZE=&amp;quot;4000&amp;quot;
+# Email Address to send mail to? (
+MAILADDR=&amp;quot;email@address.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;setup-cron-to-run-nightly:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Setup Cron to run nightly&lt;/h2&gt;
+
+&lt;p&gt;create a new file in /etc/cron.daily/ and place these contents into it..&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# vim /etc/cron.daily/mysql-backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;#!/bin/bash /usr/local/bin/automysqlbackup 2&amp;gt;&amp;amp;1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Make sure it is executable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# chmod +x /etc/cron.daily/mysql-backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I usually test it simply run that cron file from the command line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# /etc/cron.daily/mysql-backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion:6ca2d0ac2fb3a680d3e70a777f764e21&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Remember that a backup is only as good as it&amp;rsquo;s restore. What we have done here should be considered
+the bare minimum and will result in some data loss if it&amp;rsquo;s needed.. How much data loss?
+Up to one days worth of changes as that&amp;rsquo;s how frequently we are backing up things.
+If we wanted to shrink that window then run the script more often, but recognize that cost for this
+is the data retained will grow in size.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
