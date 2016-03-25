@@ -149,10 +149,6 @@ ol>li {
   line-height: 50%;
 }
 
-ol {
-  line-height: 2;
-}
-
 @font-face {
     font-family: 'kvwp';
     src: url("../fonts/KievitWebPro.eot");
