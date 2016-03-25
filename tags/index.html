@@ -135,43 +135,43 @@
     
     <h2><a href="tags/development"> development </a> 2 </h2>
     
-    <h2><a href="tags/perl"> perl </a> 1 </h2>
-    
-    <h2><a href="tags/programming"> programming </a> 1 </h2>
-    
-    <h2><a href="tags/symfony"> symfony </a> 1 </h2>
-    
     <h2><a href="tags/design-pattern"> design-pattern </a> 1 </h2>
     
     <h2><a href="tags/vba"> vba </a> 1 </h2>
     
+    <h2><a href="tags/go"> go </a> 1 </h2>
+    
+    <h2><a href="tags/ruby"> ruby </a> 1 </h2>
+    
+    <h2><a href="tags/%E7%B1%BB%E6%A8%A1%E5%9D%97"> 类模块 </a> 1 </h2>
+    
+    <h2><a href="tags/vim"> vim </a> 1 </h2>
+    
+    <h2><a href="tags/symfony"> symfony </a> 1 </h2>
+    
+    <h2><a href="tags/symfony2"> symfony2 </a> 1 </h2>
+    
+    <h2><a href="tags/backup"> backup </a> 1 </h2>
+    
+    <h2><a href="tags/programming"> programming </a> 1 </h2>
+    
+    <h2><a href="tags/mysql"> mysql </a> 1 </h2>
+    
+    <h2><a href="tags/mongodb"> mongodb </a> 1 </h2>
+    
+    <h2><a href="tags/git"> git </a> 1 </h2>
+    
     <h2><a href="tags/python"> python </a> 1 </h2>
+    
+    <h2><a href="tags/bash"> bash </a> 1 </h2>
+    
+    <h2><a href="tags/perl"> perl </a> 1 </h2>
+    
+    <h2><a href="tags/golang"> golang </a> 1 </h2>
     
     <h2><a href="tags/editor"> editor </a> 1 </h2>
     
     <h2><a href="tags/archive"> archive </a> 1 </h2>
-    
-    <h2><a href="tags/backup"> backup </a> 1 </h2>
-    
-    <h2><a href="tags/mongodb"> mongodb </a> 1 </h2>
-    
-    <h2><a href="tags/ruby"> ruby </a> 1 </h2>
-    
-    <h2><a href="tags/golang"> golang </a> 1 </h2>
-    
-    <h2><a href="tags/bash"> bash </a> 1 </h2>
-    
-    <h2><a href="tags/vim"> vim </a> 1 </h2>
-    
-    <h2><a href="tags/mysql"> mysql </a> 1 </h2>
-    
-    <h2><a href="tags/%E7%B1%BB%E6%A8%A1%E5%9D%97"> 类模块 </a> 1 </h2>
-    
-    <h2><a href="tags/go"> go </a> 1 </h2>
-    
-    <h2><a href="tags/git"> git </a> 1 </h2>
-    
-    <h2><a href="tags/symfony2"> symfony2 </a> 1 </h2>
     
   </div>
 </section>
@@ -179,31 +179,64 @@
 <aside id="meta"> </aside>
 
 <footer>
-  <div>
-    <p>
-    &copy; 2013-14 <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Steve Francia.</span></span>
-    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>; 
-    please attribute properly and link back. <br>
-    Powered by <a href="http://gohugo.io">Hugo</a>.
-        Hosted by <a href="http://servergrove.com">ServerGrove</a>.
-    </p>
-  </div>
+    <div>
+        <p>
+            &copy; 2016 Merty.
+        </p>
+    </div>
 </footer>
 <script type="text/javascript">
-(function(){var j=function(a,b){return window.getComputedStyle?getComputedStyle(a).getPropertyValue(b):a.currentStyle[b]};var k=function(a,b,c){if(a.addEventListener)a.addEventListener(b,c,false);else a.attachEvent('on'+b,c)};var l=function(a,b){for(key in b)if(b.hasOwnProperty(key))a[key]=b[key];return a};window.fitText=function(d,e,f){var g=l({'minFontSize':-1/0,'maxFontSize':1/0},f);var h=function(a){var b=e||1;var c=function(){a.style.fontSize=Math.max(Math.min(a.clientWidth/(b*10),parseFloat(g.maxFontSize)),parseFloat(g.minFontSize))+'px'};c();k(window,'resize',c)};if(d.length)for(var i=0;i<d.length;i++)h(d[i]);else h(d);return d}})();
-fitText(document.getElementById('title'), 1)
+    (function() {
+        var j = function(a, b) {
+            return window.getComputedStyle ? getComputedStyle(a).getPropertyValue(b) : a.currentStyle[b]
+        };
+        var k = function(a, b, c) {
+            if (a.addEventListener) a.addEventListener(b, c, false);
+            else a.attachEvent('on' + b, c)
+        };
+        var l = function(a, b) {
+            for (key in b)
+                if (b.hasOwnProperty(key)) a[key] = b[key];
+            return a
+        };
+        window.fitText = function(d, e, f) {
+            var g = l({
+                'minFontSize': -1 / 0,
+                'maxFontSize': 1 / 0
+            }, f);
+            var h = function(a) {
+                var b = e || 1;
+                var c = function() {
+                    a.style.fontSize = Math.max(Math.min(a.clientWidth / (b * 10), parseFloat(g.maxFontSize)), parseFloat(g.minFontSize)) + 'px'
+                };
+                c();
+                k(window, 'resize', c)
+            };
+            if (d.length)
+                for (var i = 0; i < d.length; i++) h(d[i]);
+            else h(d);
+            return d
+        }
+    })();
+    fitText(document.getElementById('title'), 1)
 </script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-7131036-1', 'spf13.com');
-  ga('require', 'linkid', 'linkid.js');
-  ga('require', 'displayfeatures');
-  ga('send', 'pageview');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-7131036-1', 'spf13.com');
+    ga('require', 'linkid', 'linkid.js');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
 </script>
 </body>
-</html>
 
+</html>
