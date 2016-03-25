@@ -204,7 +204,7 @@ End Function
 
 <h3 id="ichange:3482b2326563ae3120c25165b1c2f20a">IChange</h3>
 
-<p>上面这个接口类是打底的，还会需要另一个接口类，
+<p>INormal是打底的，还会需要另一个接口类，
 这个接口类名称为IChange，具体包含以下方法：</p>
 
 <ol>
@@ -212,6 +212,18 @@ End Function
 <li>这些源数据取得后要进行一定的加工整理，所以定义一个方法TransSource()</li>
 <li>加工整理完以后，要进行输出，所以定义一个方法FillSource()</li>
 </ol>
+
+<p>整理如下：</p>
+
+<pre><code>Public Function GetSource()
+End Function
+
+Public Function TransSource(Optional arr As Variant)
+End Function
+
+Public Function FillSource(Optional arr As Variant)
+End Function
+</code></pre>
 
         </article>
   </div>
@@ -266,7 +278,7 @@ End Function
 
 </aside>
 
-<meta itemprop="wordCount" content="61">
+<meta itemprop="wordCount" content="83">
 <meta itemprop="datePublished" content="2016-03-24">
 <meta itemprop="url" content="http://zhash.github.io/post/vba-design-pattern/">
 

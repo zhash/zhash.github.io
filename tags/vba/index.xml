@@ -84,7 +84,7 @@ End Function
 
 &lt;h3 id=&#34;ichange:3482b2326563ae3120c25165b1c2f20a&#34;&gt;IChange&lt;/h3&gt;
 
-&lt;p&gt;上面这个接口类是打底的，还会需要另一个接口类，
+&lt;p&gt;INormal是打底的，还会需要另一个接口类，
 这个接口类名称为IChange，具体包含以下方法：&lt;/p&gt;
 
 &lt;ol&gt;
@@ -92,6 +92,18 @@ End Function
 &lt;li&gt;这些源数据取得后要进行一定的加工整理，所以定义一个方法TransSource()&lt;/li&gt;
 &lt;li&gt;加工整理完以后，要进行输出，所以定义一个方法FillSource()&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;整理如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Public Function GetSource()
+End Function
+
+Public Function TransSource(Optional arr As Variant)
+End Function
+
+Public Function FillSource(Optional arr As Variant)
+End Function
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
