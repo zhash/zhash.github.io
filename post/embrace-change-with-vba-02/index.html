@@ -15,13 +15,13 @@
  
 <meta property="og:type" content="article"/>
 <meta property="og:description" content=""/>
-<meta property="og:title" content="用VBA编写拥抱变化的代码(一) : spf13.com"/>
+<meta property="og:title" content="用VBA编写拥抱变化的代码(二) : spf13.com"/>
 <meta property="og:site_name" content="spf13 is Steve Francia"/>
 <meta property="og:image" content="" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="" />
 <meta property="og:image:height" content="" />
-<meta property="og:url" content="http://zhash.github.io/post/embrace-change-with-vba-01/">
+<meta property="og:url" content="http://zhash.github.io/post/embrace-change-with-vba-02/">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2016-03-25"/>
 <meta property="article:modified_time" content="2016-03-25"/>
@@ -38,7 +38,7 @@
 <meta name="twitter:card" content="summary">
 
 <meta name="twitter:site" content="@spf13">
-<meta name="twitter:title" content="用VBA编写拥抱变化的代码(一) : spf13.com">
+<meta name="twitter:title" content="用VBA编写拥抱变化的代码(二) : spf13.com">
 <meta name="twitter:creator" content="@spf13">
 <meta name="twitter:description" content="">
 <meta name="twitter:image:src" content="">
@@ -47,8 +47,8 @@
 
 
     <base href="http://zhash.github.io">
-    <title> 用VBA编写拥抱变化的代码(一) - merty </title>
-    <link rel="canonical" href="http://zhash.github.io/post/embrace-change-with-vba-01/">
+    <title> 用VBA编写拥抱变化的代码(二) - merty </title>
+    <link rel="canonical" href="http://zhash.github.io/post/embrace-change-with-vba-02/">
     
 
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300' rel='stylesheet' type='text/css'>
@@ -114,81 +114,91 @@
 
 
 <section id="main">
-  <h1 itemprop="name" id="title">用VBA编写拥抱变化的代码(一)</h1>
+  <h1 itemprop="name" id="title">用VBA编写拥抱变化的代码(二)</h1>
   <div>
         <article itemprop="articleBody" id="content">
-           
+           <p>第一篇写了如何封装包裹传入的简单参数,小喽啰总是好解决的.
+现在如果传入的是一个数组,我们应该如何处理？大部队来了……</p>
 
-<h1 id="embrace-change:e51d929b0160f65eb1da435a8f9e8108">Embrace Change</h1>
+<p>我们照样弄个长方体的类Cuboid</p>
 
-<p>毫无疑问,这样的标题出来,应该是基于类的,在个人认为基于模块的VBA代码,
-就好象一个毫无基础的人,直接打开EXCEL在电子表格里乱图乱画一样(说这样
-的话会不会被人拍砖？一家之言,不必当真哈),当然每个写VBA代码的人都是
-这样过来的,我只在指出一条另外的路径供大家参考.同时唠叨一句,VBA的功
-能还是很强大的,当然其性能有天然的缺点,但我们又不是用它来发射火箭,够用了.</p>
+<pre><code>Private ar
 
-<p>先看一个小例子:长方体的类Cuboid</p>
+Function init(crr)
+    ar = crr
+End Function
 
-<p>属性:底面积 高
-    private are
-    private hig</p>
+Property Get arr()
+    arr = ar
+End Property
 
-<p>方法:求体积与初始化方法
-    Function volume()
-        volume = are * hig
-    End Function</p>
+Function perimeter()   '计算一个长与两个宽的和
+    brr = arr
+    For i = 1 To UBound(brr, 1)
+        perimeter = brr(1, 1) + brr(i, 2) * 2
+    Next
+End Function
+'……其他大量索引该数组的方法
+</code></pre>
 
-<pre><code>Function init(area, high)
-    are = area
-    hig = high
+<p>传入的参数是一系列长、宽的二维数组：arr = [{10,3;10,4;10,5}]</p>
+
+<p>按第一篇的思路,我们把传入的数组用一个方法包裹封装起来了.
+但arr这个方法仅仅是返回了这个数组,而使用它的方法,必须
+了解数据的哪一部分位于这个数组的哪一个索引位置上.</p>
+
+<p>方法perimeter不仅知道如何计算*类周长*（周长是2个长2个宽）,
+它还清楚的知道在数组的什么地方可以找到长与宽的数据.</p>
+
+<p>遍历数组时,长在第一个位置,宽在第二个位置,它依赖于数组的结构.
+如果这个数组的结构变了,比如,长与宽的位置颠倒了,那么这个方法
+就必须更改了,而其他引用该数组的方法也要进更改,这些方法是脆弱的.</p>
+
+<p>它们明修栈道,暗渡陈仓,表面上说投降我们了,可背后捅了我们一刀,暗箭难防啊.</p>
+
+<p>它们不符合DRY原则,长跟宽在哪个索引位置的信息不应该被多次复制,它们只应
+该存在于一个地方,我们应该用一个方法把它们包裹起来.</p>
+
+<p>修改后的类如下所示：
+    Private Type Taller
+        length As Long
+        wide As Long
+    End Type</p>
+
+<pre><code>Private tall() As Taller
+Private count
+
+Function init(arr)
+    tallify arr
+End Function
+
+Function perimeter()
+    For i = 1 To count
+        perimeter = tall(i).length + tall(i).wide * 2
+    Next
+End Function
+
+Private Function tallify(arr) As Variant  '包裹传进来的数组参数
+    For i = 1 To UBound(arr, 1)
+        ReDim Preserve tall(1 To i)
+        tall(i).length = arr(i, 1)
+        tall(i).wide = arr(i, 2)
+    Next
+    count = i - 1
 End Function
 </code></pre>
 
-<p>这是一个小巧的类,但有一些隐患在其中,我们是认为体积等于底面积*高,
-底面积是基于我们初始化传入的参数,然后这参数在我们的类中被肆意的到处引用,
-当然这个类只是举例,所以简化了这面积参数只用来求体积.</p>
+<p>上面的这个perimeter方法对那个传入数组的内部结构一无所知,
+它所知道的都是我们可以控制.tallify这个方法只包含少量的几
+句代码,只有它能理解传入的数组参数,大部队敌人来了又怎样,我
+们派一个小分队就解决了！</p>
 
-<p>如果这个类中有一个长的属性,
-从而有一个用面积参数来求宽的方法,基于此还有一个求周长的方法,甚至被引用到其他的类中作为接口&hellip;</p>
+<p>这种样式的代码让你不会受到外部所属数据结构变化的影响,并且
+还能提高代码的可读性（你说你不懂英文？咳咳,学学就懂了）,
+同时它也更符合DRY原则.</p>
 
-<p>可以想象如果我们传入的参数不是一个面积的概念,会怎样？
-所有基于它的方法都会出错,需要重新修改,因此它需要一个<em>约束</em></p>
-
-<blockquote>
-<p><em>要依赖行为,不依赖数据</em></p>
-</blockquote>
-
-<p>每一个细小的行为都只能存在于一个地方,“避免重复”(DRY),OO中的这一说法是对这一思想的简捷描述.
-类包含数据与行为,数据可以是任何内容(包括简单的字符串或数值或者复杂的数组),
-访问类的数据有两种方法:直接引用或者将其包裹在访问器方法里.</p>
-
-<p>我们应该总是将其包裹在访问器方法里,而不是直接引用这些变量,具体如下:</p>
-
-<pre><code>Private are
-Private hig
-
-Property Get area()
-    area = are
-End Property
-
-Property Get high()
-    high = hig
-End Property
-
-Function volume()
-    volume = area * high   '这里用了访问器的方法,而不是直接引用类数据变量
-End Function
-
-...
-</code></pre>
-
-<p>现在访问器area方法便是这段代码里唯一可以理解are含义的地方,
-实现此方法之后,are则由被四处引用的数据变成了只被定义了一次的行为,
-如果传入的面积参数需要进行加工时,只要在访问器中加工一次就解决了.</p>
-
-<p>这种处理方法当然也会有其他的一些新问题,但不管怎样,你都应该将数据隐藏起来,
-这种做法能保护代码避免它们受到意想不到的变化的影响,外部数据很常情况下不是
-我们能控制的.</p>
+<p>当然如果你能够控制输入,那么以上完全都不是必要的；如果你不
+能确定,请将这种不确定的影响降到最低.</p>
 
         </article>
   </div>
@@ -201,7 +211,7 @@ End Function
     <div>
         <section id="datecount">
           <h4 id="date"> Fri Mar 25, 2016 </h4>
-          <h5 id="wc"> 100 Words </h5>
+          <h5 id="wc"> 200 Words </h5>
           <h5 id="readtime"> Read in about 1 Min </h5>
         </section>
         <ul id="categories">
@@ -222,9 +232,9 @@ End Function
 
     <div>
         <section id="prev">
-            &nbsp;<a class="previous" href="http://zhash.github.io/post/embrace-change-with-vba-02/"><i class="icon-arrow-left"></i> 用VBA编写拥抱变化的代码(二)</a><br>
+            &nbsp;
         </section><section id="next">
-            &nbsp;<a class="next" href="http://zhash.github.io/post/vba-design-pattern/">设计模式在Excel VBA 类中的基础应用 <i class="icon-arrow-right"></i></a>
+            &nbsp;<a class="next" href="http://zhash.github.io/post/embrace-change-with-vba-01/">用VBA编写拥抱变化的代码(一) <i class="icon-arrow-right"></i></a>
         </section>
     </div>
 
@@ -241,9 +251,9 @@ End Function
 
 </aside>
 
-<meta itemprop="wordCount" content="84">
+<meta itemprop="wordCount" content="145">
 <meta itemprop="datePublished" content="2016-03-25">
-<meta itemprop="url" content="http://zhash.github.io/post/embrace-change-with-vba-01/">
+<meta itemprop="url" content="http://zhash.github.io/post/embrace-change-with-vba-02/">
 
 
 <aside id=comments>
@@ -251,9 +261,9 @@ End Function
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'merty';
-    var disqus_identifier = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-01\/';
-    var disqus_title = '用VBA编写拥抱变化的代码(一)';
-    var disqus_url = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-01\/';
+    var disqus_identifier = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-02\/';
+    var disqus_title = '用VBA编写拥抱变化的代码(二)';
+    var disqus_url = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-02\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
