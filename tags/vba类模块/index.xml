@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vba类模块 on Free Hacking</title>
+    <link>http://zhash.github.io/tags/vba%E7%B1%BB%E6%A8%A1%E5%9D%97/</link>
+    <description>Recent content in Vba类模块 on Free Hacking</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 25 Mar 2016 14:11:11 +0800</lastBuildDate>
+    <atom:link href="http://zhash.github.io/tags/vba%E7%B1%BB%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>用VBA编写拥抱变化的代码(一)</title>
+      <link>http://zhash.github.io/post/embrace-change-with-vba-01/</link>
+      <pubDate>Fri, 25 Mar 2016 14:11:11 +0800</pubDate>
+      
+      <guid>http://zhash.github.io/post/embrace-change-with-vba-01/</guid>
+      <description>
+
+&lt;h1 id=&#34;embrace-change:e51d929b0160f65eb1da435a8f9e8108&#34;&gt;Embrace Change&lt;/h1&gt;
+
+&lt;p&gt;毫无疑问,这样的标题出来,应该是基于类的,在个人认为基于模块的VBA代码,
+就好象一个毫无基础的人,直接打开EXCEL在电子表格里乱图乱画一样(说这样
+的话会不会被人拍砖？一家之言,不必当真哈),当然每个写VBA代码的人都是
+这样过来的,我只在指出一条另外的路径供大家参考.同时唠叨一句,VBA的功
+能还是很强大的,当然其性能有天然的缺点,但我们又不是用它来发射火箭,够用了.&lt;/p&gt;
+
+&lt;p&gt;先看一个小例子:长方体的类Cuboid&lt;/p&gt;
+
+&lt;p&gt;属性:底面积 高
+    private are
+    private hig&lt;/p&gt;
+
+&lt;p&gt;方法:求体积与初始化方法
+    Function volume()
+        volume = are * hig
+    End Function&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Function init(area, high)
+    are = area
+    hig = high
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这是一个小巧的类,但有一些隐患在其中,我们是认为体积等于底面积*高,
+底面积是基于我们初始化传入的参数,然后这参数在我们的类中被肆意的到处引用,
+当然这个类只是举例,所以简化了这面积参数只用来求体积.&lt;/p&gt;
+
+&lt;p&gt;如果这个类中有一个长的属性,
+从而有一个用面积参数来求宽的方法,基于此还有一个求周长的方法,甚至被引用到其他的类中作为接口&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;可以想象如果我们传入的参数不是一个面积的概念,会怎样？
+所有基于它的方法都会出错,需要重新修改,因此它需要一个&lt;em&gt;约束&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;要依赖行为-不依赖数据:e51d929b0160f65eb1da435a8f9e8108&#34;&gt;要依赖行为,不依赖数据&lt;/h2&gt;
+
+&lt;p&gt;每一个细小的行为都只能存在于一个地方,“避免重复”(DRY),OO中的这一说法是对这一思想的简捷描述.
+类包含数据与行为,数据可以是任何内容(包括简单的字符串或数值或者复杂的数组),
+访问类的数据有两种方法:直接引用或者将其包裹在访问器方法里.&lt;/p&gt;
+
+&lt;p&gt;我们应该总是将其包裹在访问器方法里,而不是直接引用这些变量,具体如下:
+    Private are
+    Private hig&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Property Get area()
+    area = are
+End Property
+
+Property Get high()
+    high = hig
+End Property
+
+Function volume()
+    volume = area * high   &#39;请大家注意这一行的不同,它是用了访问器的方法,而不是直接引用类数据变量
+End Function
+
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在访问器area方法便是这段代码里唯一可以理解are含义的地方,
+实现此方法之后,are则由被四处引用的数据变成了只被定义了一次的行为,
+如果传入的面积参数需要进行加工时,只要在访问器中加工一次就解决了.&lt;/p&gt;
+
+&lt;p&gt;这种处理方法当然也会有其他的一些新问题,但不管怎样,你都应该将数据隐藏起来,
+这种做法能保护代码避免它们受到意想不到的变化的影响,外部数据很常情况下不是
+我们能控制的.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -142,6 +142,19 @@
     
         <article class="post">
     <header>
+      <h2><a href="http://zhash.github.io/post/embrace-change-with-vba-01/">用VBA编写拥抱变化的代码(一) </a> </h2>
+      <div class="post-meta">Fri, Mar 25, 2016 -  Read in 1 Min </div>
+    </header>
+
+    Embrace Change 毫无疑问,这样的标题出来,应该是基于类的,在个人认为基于模块的VBA代码, 就好象一个毫无基础的人,直接打开EXCEL在电子表格里乱图乱画一样(说这样 的话会不会被人拍砖？一家之言,不必当真哈),当然每个写VBA代码的人都是 这样过来的,我只在指出一条另外的路径供大家参考.同时唠叨一句,VBA的功 能还是很强大的,当然其性能有天然的缺点,但我们又不是用它来发射火箭,够用了. 先看一个小例子:长方体的类Cuboid 属性:底面积 高 private are private hig 方法:求体积与初始化方法 Function volume() volume = are * hig End Function Function init(area, high) are = area hig = high End Function 这是一个小巧的类,但有一些隐患在其中,我们是认为体积等于底面积*高, 底面积是基于我们初始化传入的参数,然后这参数在我们的类中被肆意的到处引用, 当然这个类只是举例,所以简化了这面积参数只用来求体积. 如果这个类中有一个长的属性, 从而有一个用面积参数来求宽的方法,基于此还有一个求周长的方法,甚至被引用到其他的类中作为接口&hellip; 可以想象如果我们传入的参数不是一个面积的概念,会怎样？ 所有基于它的方法都会出错,需要重新修改,因此它需要一个约束 要依赖行为,不依赖数据 每一个细小的行为都只能存在于一个地方,“避免重复”(DRY),OO中的这一说法是对这一思想的简捷描述. 类包含数据与行为,数据可以是任何内容(包括简单的字符串或数值或者复杂的数组), 访问类的数据有两种方法:直接引用或者将其包裹在访问器方法里. 我们应该总是将其包裹在访问器方法里,而不是直接引用这些变量,具体如下: Private are Private hig Property Get area() area = are End Property Property Get high() high = hig End Property Function volume() volume = area * high '请大家注意这一行的不同,它是用了访问器的方法,而不是直接引用类数据变量 End Function ...
+    <footer>
+        <a href='http://zhash.github.io/post/embrace-change-with-vba-01/'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+    
+        <article class="post">
+    <header>
       <h2><a href="http://zhash.github.io/post/vba-design-pattern/">设计模式在Excel VBA 类中的基础应用 </a> </h2>
       <div class="post-meta">Thu, Mar 24, 2016 -  Read in 2 Min </div>
     </header>
