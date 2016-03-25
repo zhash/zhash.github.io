@@ -53,7 +53,9 @@ End Function
 &lt;p&gt;可以想象如果我们传入的参数不是一个面积的概念,会怎样？
 所有基于它的方法都会出错,需要重新修改,因此它需要一个&lt;em&gt;约束&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;要依赖行为-不依赖数据:e51d929b0160f65eb1da435a8f9e8108&#34;&gt;要依赖行为,不依赖数据&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;要依赖行为,不依赖数据&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;每一个细小的行为都只能存在于一个地方,“避免重复”(DRY),OO中的这一说法是对这一思想的简捷描述.
 类包含数据与行为,数据可以是任何内容(包括简单的字符串或数值或者复杂的数组),
@@ -72,7 +74,7 @@ Property Get high()
 End Property
 
 Function volume()
-    volume = area * high   &#39;请大家注意这一行的不同,它是用了访问器的方法,而不是直接引用类数据变量
+    volume = area * high   &#39;这里用了访问器的方法,而不是直接引用类数据变量
 End Function
 
 ...
