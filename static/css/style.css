@@ -144,6 +144,11 @@ article ul, article ol {
     margin-left: 1em
 }
 
+ol>li {
+  font-size: 85%;
+  line-height: 1;
+}
+
 @font-face {
     font-family: 'kvwp';
     src: url("../fonts/KievitWebPro.eot");
