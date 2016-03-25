@@ -312,7 +312,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1#title {
-    font-size: 1em;
+    font-size: 2.625em;
     line-height: 1.14286em;
     margin: 0em 0 0.5em;
     text-transform: capitalize;
