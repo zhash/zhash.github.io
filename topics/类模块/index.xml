@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>类模块 on Free Hacking</title>
+    <link>http://zhash.github.io/topics/%E7%B1%BB%E6%A8%A1%E5%9D%97/</link>
+    <description>Recent content in 类模块 on Free Hacking</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
+    <lastBuildDate>Mon, 28 Mar 2016 09:32:29 +0800</lastBuildDate>
+    <atom:link href="http://zhash.github.io/topics/%E7%B1%BB%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>embrace change with vba 03</title>
+      <link>http://zhash.github.io/post/embrace-change-with-vba-03/</link>
+      <pubDate>Mon, 28 Mar 2016 09:32:29 +0800</pubDate>
+      
+      <guid>http://zhash.github.io/post/embrace-change-with-vba-03/</guid>
+      <description>&lt;p&gt;前两篇中我们都提到了DRY原则，在这篇中，我们正式提出一个口号：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;从今天起，面朝大海，春暖花开，旗帜鲜明全面推行单一职责原则！&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;不管是类还是方法，单一职责的思想都有着重要的意义。&lt;/p&gt;
+
+&lt;p&gt;我们这里讨论方法，对于方法我们尽量要能够用一句话来描述它的职责，它是干什么的。&lt;/p&gt;
+
+&lt;p&gt;我们来看一下第二篇中类里提到的一个方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Function perimeter()
+    For i = 1 To count
+        perimeter = tall(i).length + tall(i).wide * 2
+    Next
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个方法显然有两项职责：遍历传入的数据，并计算每一个长方形的类周长
+什么叫类周长？——请看&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-02/&#34;&gt;用VBA编写拥抱变化的代码(二)&lt;/a&gt;！&lt;/p&gt;
+
+&lt;p&gt;我们根据单一职责原则把它分解为两个方法，这种重构肯定会带来额外的负
+担，但对于性能如有必要，可在以后加以改善，现在最主要的是编写易于更
+改的代码重构后的代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Function perimeters()
+    For i = 1 To count
+        perimeter tall(i)
+    Next
+End Function
+
+Private Function perimeter(tall As Taller)
+    perimeter = tall.length + tall.wide * 2
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将这种迭代动作分离出来，是一种常见的很容易识别出来的多职责情形。&lt;/p&gt;
+
+&lt;p&gt;当然象上面这样简单的重构，其影响力是非常小的，但这种编码风格一旦形成，
+累积起来对我们影响是非常巨大的。&lt;/p&gt;
+
+&lt;p&gt;具有单一职责的方法的优点：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;使类高内聚，我们说类也应该是具有单一职责的，目的性强的，从哪里做起？就是从类中方法做起，每一个短小精悍的方法，对于类会起到一个净化的效果。&lt;/li&gt;
+&lt;li&gt;替代注释，单一职责的方法可读性好，可以避免大量的注释，这些陈腐的注释，我已见过许多，都是陷阱。&lt;/li&gt;
+&lt;li&gt;编码风格的传承，后续维护你代码的程序员会按照你的编码风格进行维护。&lt;/li&gt;
+&lt;li&gt;最重要的一点，毫无疑问这种单一职责的方法是易于修改，更易于拥抱变化的。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
