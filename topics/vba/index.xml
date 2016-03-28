@@ -7,8 +7,146 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 28 Mar 2016 09:32:29 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 28 Mar 2016 10:25:39 +0800</lastBuildDate>
     <atom:link href="http://zhash.github.io/topics/vba/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>embrace change with vba 04</title>
+      <link>http://zhash.github.io/post/embrace-change-with-vba-04/</link>
+      <pubDate>Mon, 28 Mar 2016 10:25:39 +0800</pubDate>
+      
+      <guid>http://zhash.github.io/post/embrace-change-with-vba-04/</guid>
+      <description>
+
+&lt;h1 id=&#34;embrace-change-4:98c9c7b50c5e1d7551c9be09a8121d19&#34;&gt;Embrace Change 4&lt;/h1&gt;
+
+&lt;p&gt;前面几篇中我们探讨了如何管理外来参数的问题，后面几篇，我们来看看如何跟其他的类合作：总的原则当然是低耦合啦。&lt;/p&gt;
+
+&lt;p&gt;在最初学习时，经常会冒出个想法，前辈们经常都说要低耦合，那干脆不耦合不行吗？
+——不要说我笨哈，这真是我的学习过程，答案公布如下，免得有人跟我一样纠结中：
+&lt;em&gt;不耦合就谈不上类的组合运用啦！&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;所以耦合是必须的，只是如何减少这种耦合度才是我们要考虑的！&lt;/p&gt;
+
+&lt;p&gt;那如何减少耦合度呢？——只知道应该知道的，不该知道的东西不要知道！
+知道的太多，后果……你懂的！嘿嘿……&lt;/p&gt;
+
+&lt;p&gt;扯了一篇的闲话，下面上重点，来看两个类：&lt;/p&gt;
+
+&lt;p&gt;零件（Parts类）:
+它负责计算长方形零件（因为现有公司只生产长方形）的总价，
+总价 = 单价 * 零件周长，当然还有其他功能，我们暂时忽略。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Private pric
+Private leng
+Private wid
+Private rect As Rects
+
+Property Get length()
+    length = leng
+End Property
+
+Property Get wide()
+    wide = wid
+End Property
+
+Property Get price()
+    price = pric
+End Property
+
+Function init(price, length, wide)
+    pric = price
+    leng = length
+    wid = wide
+End Function
+
+Function total()
+    Set rect = New Rects
+    rect.init length, wide
+    total = price * rect.perimeter
+End Function
+
+&#39;其他功能方法……
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;长方形零件（Rects）
+    Private leng
+    Private wid&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Property Get length()
+    length = leng
+End Property
+
+Property Get wide()
+    wide = wid
+End Property
+
+Function init(length, wide)
+    leng = length
+    wid = wide
+End Function
+
+Function perimeter()
+    perimeter = (length + wide) * 2
+End Function
+
+&#39;……
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;它们之间的合作是这样的：
+    Dim o As New Parts
+    Sub old_parts()
+        o.init 2, 3, 4   &amp;lsquo;单价,长,宽
+        o.total
+        &amp;lsquo;……
+    End Sub&lt;/p&gt;
+
+&lt;p&gt;这两个类，表面看上去似乎挺平常的，但其实暗藏杀机，我们后面一一分解，这篇分解不完，下篇继续分解。&lt;/p&gt;
+
+&lt;p&gt;首先一个耦合是Parts类的，知道了Rects类的名字，如果Rects类的名称改变，相应的Parts类也要改变了。
+另外Parts类的total方法中，引用了Rects类，那表明它只能计算长方形零件总价了，如果公司产品创新，有了正方形、三角形、圆形等等零件，这个方法就无能为力了。
+当然还有其他问题，我们先关注以上这两点。&lt;/p&gt;
+
+&lt;p&gt;其实对于Parts类来说，它只要知道一个可以响应周长的对象就可以了，所以更改后的代码如下：
+    Private pric
+    Private part&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Property Get price()
+    price = pric
+End Property
+
+Function init(price, rect)
+    pric = price
+    Set part = rect
+End Function
+
+Function total()
+    total = price * part.perimeter
+End Function
+
+&#39;其他功能方法……
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;它与Rects类的合作如下所示：
+    Dim o As New Parts
+    Dim rect As New Rects&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Sub new_parts()
+    rect.init 3, 4 &#39;长、宽
+    o.init 2, rect   &#39;单价,零件
+    o.total
+    &#39;……
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将Rects类的实例创建移动到Parts类外部，能将这两个类解耦出来，
+Parts类现在可以跟任何实现了计算周长方法的零件进行合作了。
+这一点能够在VBA中较为方便的实现，依赖于VBA是一种弱类型的语言，
+变量不需要强制事先声明是哪个类型，它能根据实际需要自动进行切换。&lt;/p&gt;
+
+&lt;p&gt;好吧，这篇就告一段落了，这篇中还有一些问题，我们留到下一篇中继续分析。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>用VBA编写拥抱变化的代码(三)</title>
@@ -16,7 +154,11 @@
       <pubDate>Mon, 28 Mar 2016 09:32:29 +0800</pubDate>
       
       <guid>http://zhash.github.io/post/embrace-change-with-vba-03/</guid>
-      <description>&lt;p&gt;前两篇中我们都提到了DRY原则，在这篇中，我们正式提出一个口号：&lt;/p&gt;
+      <description>
+
+&lt;h1 id=&#34;embrace-change-3:f261325e8964f5967e8e10de2a5e6155&#34;&gt;Embrace Change 3&lt;/h1&gt;
+
+&lt;p&gt;前两篇中我们都提到了DRY原则，在这篇中，我们正式提出一个口号：&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;从今天起，面朝大海，春暖花开，旗帜鲜明全面推行单一职责原则！&lt;/em&gt;&lt;/p&gt;
@@ -75,7 +217,11 @@ End Function
       <pubDate>Fri, 25 Mar 2016 15:05:04 +0800</pubDate>
       
       <guid>http://zhash.github.io/post/embrace-change-with-vba-02/</guid>
-      <description>&lt;p&gt;第一篇写了如何封装包裹传入的简单参数,小喽啰总是好解决的.
+      <description>
+
+&lt;h1 id=&#34;embrace-change-2:96868293a4830531d944ba806f9b1e03&#34;&gt;Embrace Change 2&lt;/h1&gt;
+
+&lt;p&gt;第一篇写了如何封装包裹传入的简单参数,小喽啰总是好解决的.
 现在如果传入的是一个数组,我们应该如何处理？大部队来了……&lt;/p&gt;
 
 &lt;p&gt;我们照样弄个长方体的类Cuboid&lt;/p&gt;
@@ -168,7 +314,7 @@ End Function
       <guid>http://zhash.github.io/post/embrace-change-with-vba-01/</guid>
       <description>
 
-&lt;h1 id=&#34;embrace-change:e51d929b0160f65eb1da435a8f9e8108&#34;&gt;Embrace Change&lt;/h1&gt;
+&lt;h1 id=&#34;embrace-change-1:e51d929b0160f65eb1da435a8f9e8108&#34;&gt;Embrace Change 1&lt;/h1&gt;
 
 &lt;p&gt;毫无疑问,这样的标题出来,应该是基于类的,在个人认为基于模块的VBA代码,
 就好象一个毫无基础的人,直接打开EXCEL在电子表格里乱图乱画一样(说这样

@@ -16,7 +16,11 @@
       <pubDate>Fri, 25 Mar 2016 15:05:04 +0800</pubDate>
       
       <guid>http://zhash.github.io/post/embrace-change-with-vba-02/</guid>
-      <description>&lt;p&gt;第一篇写了如何封装包裹传入的简单参数,小喽啰总是好解决的.
+      <description>
+
+&lt;h1 id=&#34;embrace-change-2:96868293a4830531d944ba806f9b1e03&#34;&gt;Embrace Change 2&lt;/h1&gt;
+
+&lt;p&gt;第一篇写了如何封装包裹传入的简单参数,小喽啰总是好解决的.
 现在如果传入的是一个数组,我们应该如何处理？大部队来了……&lt;/p&gt;
 
 &lt;p&gt;我们照样弄个长方体的类Cuboid&lt;/p&gt;
@@ -109,7 +113,7 @@ End Function
       <guid>http://zhash.github.io/post/embrace-change-with-vba-01/</guid>
       <description>
 
-&lt;h1 id=&#34;embrace-change:e51d929b0160f65eb1da435a8f9e8108&#34;&gt;Embrace Change&lt;/h1&gt;
+&lt;h1 id=&#34;embrace-change-1:e51d929b0160f65eb1da435a8f9e8108&#34;&gt;Embrace Change 1&lt;/h1&gt;
 
 &lt;p&gt;毫无疑问,这样的标题出来,应该是基于类的,在个人认为基于模块的VBA代码,
 就好象一个毫无基础的人,直接打开EXCEL在电子表格里乱图乱画一样(说这样

@@ -10,26 +10,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="keywords" content="VBA, VBA类模块, Design Pattern, ">
+<meta name="keywords" content="VBA, 类模块, Design Pattern, ">
 
  
 <meta property="og:type" content="article"/>
 <meta property="og:description" content=""/>
-<meta property="og:title" content="用VBA编写拥抱变化的代码(一) : spf13.com"/>
+<meta property="og:title" content="embrace change with vba 04 : spf13.com"/>
 <meta property="og:site_name" content="spf13 is Steve Francia"/>
 <meta property="og:image" content="" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="" />
 <meta property="og:image:height" content="" />
-<meta property="og:url" content="http://zhash.github.io/post/embrace-change-with-vba-01/">
+<meta property="og:url" content="http://zhash.github.io/post/embrace-change-with-vba-04/">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2016-03-25"/>
-<meta property="article:modified_time" content="2016-03-25"/>
+<meta property="article:published_time" content="2016-03-28"/>
+<meta property="article:modified_time" content="2016-03-28"/>
 
 
 
 <meta property="article:tag" content="VBA">
-<meta property="article:tag" content="VBA类模块">
+<meta property="article:tag" content="类模块">
 <meta property="article:tag" content="Design Pattern">
 
 
@@ -38,7 +38,7 @@
 <meta name="twitter:card" content="summary">
 
 <meta name="twitter:site" content="@spf13">
-<meta name="twitter:title" content="用VBA编写拥抱变化的代码(一) : spf13.com">
+<meta name="twitter:title" content="embrace change with vba 04 : spf13.com">
 <meta name="twitter:creator" content="@spf13">
 <meta name="twitter:description" content="">
 <meta name="twitter:image:src" content="">
@@ -47,8 +47,8 @@
 
 
     <base href="http://zhash.github.io">
-    <title> 用VBA编写拥抱变化的代码(一) - merty </title>
-    <link rel="canonical" href="http://zhash.github.io/post/embrace-change-with-vba-01/">
+    <title> embrace change with vba 04 - merty </title>
+    <link rel="canonical" href="http://zhash.github.io/post/embrace-change-with-vba-04/">
     
 
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300' rel='stylesheet' type='text/css'>
@@ -114,81 +114,138 @@
 
 
 <section id="main">
-  <h1 itemprop="name" id="title">用VBA编写拥抱变化的代码(一)</h1>
+  <h1 itemprop="name" id="title">embrace change with vba 04</h1>
   <div>
         <article itemprop="articleBody" id="content">
            
 
-<h1 id="embrace-change-1:e51d929b0160f65eb1da435a8f9e8108">Embrace Change 1</h1>
+<h1 id="embrace-change-4:98c9c7b50c5e1d7551c9be09a8121d19">Embrace Change 4</h1>
 
-<p>毫无疑问,这样的标题出来,应该是基于类的,在个人认为基于模块的VBA代码,
-就好象一个毫无基础的人,直接打开EXCEL在电子表格里乱图乱画一样(说这样
-的话会不会被人拍砖？一家之言,不必当真哈),当然每个写VBA代码的人都是
-这样过来的,我只在指出一条另外的路径供大家参考.同时唠叨一句,VBA的功
-能还是很强大的,当然其性能有天然的缺点,但我们又不是用它来发射火箭,够用了.</p>
+<p>前面几篇中我们探讨了如何管理外来参数的问题，后面几篇，我们来看看如何跟其他的类合作：总的原则当然是低耦合啦。</p>
 
-<p>先看一个小例子:长方体的类Cuboid</p>
+<p>在最初学习时，经常会冒出个想法，前辈们经常都说要低耦合，那干脆不耦合不行吗？
+——不要说我笨哈，这真是我的学习过程，答案公布如下，免得有人跟我一样纠结中：
+<em>不耦合就谈不上类的组合运用啦！</em></p>
 
-<p>属性:底面积 高
-    private are
-    private hig</p>
+<p>所以耦合是必须的，只是如何减少这种耦合度才是我们要考虑的！</p>
 
-<p>方法:求体积与初始化方法
-    Function volume()
-        volume = are * hig
-    End Function</p>
+<p>那如何减少耦合度呢？——只知道应该知道的，不该知道的东西不要知道！
+知道的太多，后果……你懂的！嘿嘿……</p>
 
-<pre><code>Function init(area, high)
-    are = area
-    hig = high
-End Function
-</code></pre>
+<p>扯了一篇的闲话，下面上重点，来看两个类：</p>
 
-<p>这是一个小巧的类,但有一些隐患在其中,我们是认为体积等于底面积*高,
-底面积是基于我们初始化传入的参数,然后这参数在我们的类中被肆意的到处引用,
-当然这个类只是举例,所以简化了这面积参数只用来求体积.</p>
+<p>零件（Parts类）:
+它负责计算长方形零件（因为现有公司只生产长方形）的总价，
+总价 = 单价 * 零件周长，当然还有其他功能，我们暂时忽略。</p>
 
-<p>如果这个类中有一个长的属性,
-从而有一个用面积参数来求宽的方法,基于此还有一个求周长的方法,甚至被引用到其他的类中作为接口&hellip;</p>
+<pre><code>Private pric
+Private leng
+Private wid
+Private rect As Rects
 
-<p>可以想象如果我们传入的参数不是一个面积的概念,会怎样？
-所有基于它的方法都会出错,需要重新修改,因此它需要一个<em>约束</em></p>
-
-<blockquote>
-<p><em>要依赖行为,不依赖数据</em></p>
-</blockquote>
-
-<p>每一个细小的行为都只能存在于一个地方,“避免重复”(DRY),OO中的这一说法是对这一思想的简捷描述.
-类包含数据与行为,数据可以是任何内容(包括简单的字符串或数值或者复杂的数组),
-访问类的数据有两种方法:直接引用或者将其包裹在访问器方法里.</p>
-
-<p>我们应该总是将其包裹在访问器方法里,而不是直接引用这些变量,具体如下:</p>
-
-<pre><code>Private are
-Private hig
-
-Property Get area()
-    area = are
+Property Get length()
+    length = leng
 End Property
 
-Property Get high()
-    high = hig
+Property Get wide()
+    wide = wid
 End Property
 
-Function volume()
-    volume = area * high   '这里用了访问器的方法,而不是直接引用类数据变量
+Property Get price()
+    price = pric
+End Property
+
+Function init(price, length, wide)
+    pric = price
+    leng = length
+    wid = wide
 End Function
 
-...
+Function total()
+    Set rect = New Rects
+    rect.init length, wide
+    total = price * rect.perimeter
+End Function
+
+'其他功能方法……
 </code></pre>
 
-<p>现在访问器area方法便是这段代码里唯一可以理解are含义的地方,
-实现此方法之后,are则由被四处引用的数据变成了只被定义了一次的行为,
-如果传入的面积参数需要进行加工时,只要在访问器中加工一次就解决了.</p>
+<p>长方形零件（Rects）
+    Private leng
+    Private wid</p>
 
-<p>这种处理方法当然也会有其他的一些新问题,但不管怎样,你都应该将数据隐藏起来,
-这种做法能保护代码避免它们受到意想不到的变化的影响,外部数据很常情况下不是
-我们能控制的.</p>
+<pre><code>Property Get length()
+    length = leng
+End Property
+
+Property Get wide()
+    wide = wid
+End Property
+
+Function init(length, wide)
+    leng = length
+    wid = wide
+End Function
+
+Function perimeter()
+    perimeter = (length + wide) * 2
+End Function
+
+'……
+</code></pre>
+
+<p>它们之间的合作是这样的：
+    Dim o As New Parts
+    Sub old_parts()
+        o.init 2, 3, 4   &lsquo;单价,长,宽
+        o.total
+        &lsquo;……
+    End Sub</p>
+
+<p>这两个类，表面看上去似乎挺平常的，但其实暗藏杀机，我们后面一一分解，这篇分解不完，下篇继续分解。</p>
+
+<p>首先一个耦合是Parts类的，知道了Rects类的名字，如果Rects类的名称改变，相应的Parts类也要改变了。
+另外Parts类的total方法中，引用了Rects类，那表明它只能计算长方形零件总价了，如果公司产品创新，有了正方形、三角形、圆形等等零件，这个方法就无能为力了。
+当然还有其他问题，我们先关注以上这两点。</p>
+
+<p>其实对于Parts类来说，它只要知道一个可以响应周长的对象就可以了，所以更改后的代码如下：
+    Private pric
+    Private part</p>
+
+<pre><code>Property Get price()
+    price = pric
+End Property
+
+Function init(price, rect)
+    pric = price
+    Set part = rect
+End Function
+
+Function total()
+    total = price * part.perimeter
+End Function
+
+'其他功能方法……
+</code></pre>
+
+<p>它与Rects类的合作如下所示：
+    Dim o As New Parts
+    Dim rect As New Rects</p>
+
+<pre><code>Sub new_parts()
+    rect.init 3, 4 '长、宽
+    o.init 2, rect   '单价,零件
+    o.total
+    '……
+End Sub
+</code></pre>
+
+<p>将Rects类的实例创建移动到Parts类外部，能将这两个类解耦出来，
+Parts类现在可以跟任何实现了计算周长方法的零件进行合作了。
+这一点能够在VBA中较为方便的实现，依赖于VBA是一种弱类型的语言，
+变量不需要强制事先声明是哪个类型，它能根据实际需要自动进行切换。</p>
+
+<p>好吧，这篇就告一段落了，这篇中还有一些问题，我们留到下一篇中继续分析。</p>
 
         </article>
   </div>
@@ -200,20 +257,22 @@ End Function
 
     <div>
         <section id="datecount">
-          <h4 id="date"> Fri Mar 25, 2016 </h4>
-          <h5 id="wc"> 100 Words </h5>
-          <h5 id="readtime"> Read in about 1 Min </h5>
+          <h4 id="date"> Mon Mar 28, 2016 </h4>
+          <h5 id="wc"> 300 Words </h5>
+          <h5 id="readtime"> Read in about 2 Min </h5>
         </section>
         <ul id="categories">
           
             <li><a href="http://zhash.github.io/topics/vba">VBA</a> </li>
+          
+            <li><a href="http://zhash.github.io/topics/%E7%B1%BB%E6%A8%A1%E5%9D%97">类模块</a> </li>
           
         </ul>
         <ul id="tags">
           
             <li> <a href="http://zhash.github.io/tags/vba">VBA</a> </li>
           
-            <li> <a href="http://zhash.github.io/tags/vba%E7%B1%BB%E6%A8%A1%E5%9D%97">VBA类模块</a> </li>
+            <li> <a href="http://zhash.github.io/tags/%E7%B1%BB%E6%A8%A1%E5%9D%97">类模块</a> </li>
           
             <li> <a href="http://zhash.github.io/tags/design-pattern">Design Pattern</a> </li>
           
@@ -222,9 +281,9 @@ End Function
 
     <div>
         <section id="prev">
-            &nbsp;<a class="previous" href="http://zhash.github.io/post/embrace-change-with-vba-02/"><i class="icon-arrow-left"></i> 用VBA编写拥抱变化的代码(二)</a><br>
+            &nbsp;
         </section><section id="next">
-            &nbsp;<a class="next" href="http://zhash.github.io/post/vba-design-pattern/">设计模式在Excel VBA 类中的基础应用 <i class="icon-arrow-right"></i></a>
+            &nbsp;<a class="next" href="http://zhash.github.io/post/embrace-change-with-vba-03/">用VBA编写拥抱变化的代码(三) <i class="icon-arrow-right"></i></a>
         </section>
     </div>
 
@@ -241,9 +300,9 @@ End Function
 
 </aside>
 
-<meta itemprop="wordCount" content="85">
-<meta itemprop="datePublished" content="2016-03-25">
-<meta itemprop="url" content="http://zhash.github.io/post/embrace-change-with-vba-01/">
+<meta itemprop="wordCount" content="215">
+<meta itemprop="datePublished" content="2016-03-28">
+<meta itemprop="url" content="http://zhash.github.io/post/embrace-change-with-vba-04/">
 
 
 <aside id=comments>
@@ -251,9 +310,9 @@ End Function
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'merty';
-    var disqus_identifier = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-01\/';
-    var disqus_title = '用VBA编写拥抱变化的代码(一)';
-    var disqus_url = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-01\/';
+    var disqus_identifier = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-04\/';
+    var disqus_title = 'embrace change with vba 04';
+    var disqus_url = 'http:\/\/zhash.github.io\/post\/embrace-change-with-vba-04\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
