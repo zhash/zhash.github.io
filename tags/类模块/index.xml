@@ -23,13 +23,13 @@
 &lt;p&gt;这篇主要聊聊类之间的依赖关系.&lt;/p&gt;
 
 &lt;p&gt;在第四篇中列出的两个类Parts与Rects类
-（这边不再重复列出原有的类代码了,有需要的直接查看：
+（这边不再重复列出原有的类代码了,有需要的直接查看:
 [用VBA编写拥抱变化的代码(四)] [EmbraceChange04]）&lt;/p&gt;
 
 &lt;p&gt;它们的合作之前都是Parts类依赖于Rects类,Parts类需要Rects类的perimeter.
-这种依赖关系可以反转的反转后两个类的代码如下：&lt;/p&gt;
+这种依赖关系可以反转的反转后两个类的代码如下:&lt;/p&gt;
 
-&lt;p&gt;Parts类：&lt;/p&gt;
+&lt;p&gt;Parts类:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Private pric
 
@@ -46,7 +46,7 @@ Function total(perimeter)
 End Function
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Rects类：&lt;/p&gt;
+&lt;p&gt;Rects类:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Private leng
 Private wid
@@ -76,7 +76,7 @@ End Function
 &#39;……
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;它们之间的合作是这样的：&lt;/p&gt;
+&lt;p&gt;它们之间的合作是这样的:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Dim o As New Parts
 Dim rect As New Rects
@@ -101,11 +101,11 @@ End Sub
 
 &lt;p&gt;对于上例来说,比较简单,无论谁依赖谁都是可以的.但碰到复杂点的类之间的合作,
 多个类的合作,依赖关系的选择就需要我们进行深入的研究.我们基于怎样的判断来
-选择呢？没有万全的方法,更多的是靠经验：
+选择呢？没有万全的方法,更多的是靠经验:
 &lt;em&gt;应当依赖那些不容易发生变化的类&lt;/em&gt;.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;VBA固有的类,肯定是我们可以依赖的,它们稳定；而外部的类,相对就没有
+&lt;li&gt;VBA固有的类,肯定是我们可以依赖的,它们稳定;而外部的类,相对就没有
 那么稳定可靠.&lt;/li&gt;
 &lt;li&gt;抽象类比具体类应该更稳定,对于VBA来说,抽象类就是指接口类了.&lt;/li&gt;
 &lt;li&gt;如果一个类本身就已经拥有许多依赖关系,这时,我们就要慎重对待了,说不定,我们就是那最后一根压垮骆驼的稻草.&lt;/li&gt;
@@ -119,14 +119,13 @@ End Sub
 这些东西貌似等真正需要的时候再去学习也为时不晚（貌似都没有真正需要过）.&lt;/p&gt;
 
 &lt;p&gt;相信大多数长期学习VBA的,都跟我有同样的经历,不经意间接触到了别的
-编程语言,才会真正觉得：&lt;/p&gt;
+编程语言,才会真正觉得:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;语言那么多,应该去看看!——OO会带你到达另一个世界——回过头来,你会体会
-到：见山是山,见山不是山,见山还是山的三重境界.对于奇技淫巧你会由衷的赞
-叹,但你只是旁观者；而对于OO,它会改变你的思想,长驻在你的心间,你可以随意
-的按自己的意愿塑造属于自己的OO,沉淀得越久,OO将象阳光、空气、水一样,让
-你不可或缺了.&lt;/em&gt;&lt;/p&gt;
+到:见山是山,见山不是山,见山还是山的三重境界.对于奇技淫巧你会由衷的赞
+叹,但你只是旁观者;而对于OO,它会改变你的思想,长驻在你的心间,你可以随意
+的按自己的意愿塑造属于自己的OO,沉淀得越久,OO将象阳光、空气、水一样,让你不可或缺了.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
     </item>
@@ -145,7 +144,7 @@ End Sub
 我们不搞大块头,只简单的聊一点轻松的哈,把其中关键点出来,大家一看就明白的那种.&lt;/p&gt;
 
 &lt;p&gt;我们来看一下上一篇中改进后的Parts类,具体的所有代码我就不复制了,需要的看
-&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-04/&#34;&gt;前一篇&lt;/a&gt;,里面有一个方法total,相关代码如下：&lt;/p&gt;
+&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-04/&#34;&gt;前一篇&lt;/a&gt;,里面有一个方法total,相关代码如下:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Function total()
     total = price * part.perimeter
@@ -156,7 +155,7 @@ End Function
 
 &lt;p&gt;我们看到该方法知道了part对象的perimeter方法,如果Parts类对part.perimeter的
 引用是唯一的,那么这段代码没什么问题.但有的时候,现实总是残酷的,
-考虑以下影响：&lt;/p&gt;
+考虑以下影响:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;如果Parts类中还有其他方法大量引用了part.perimeter,那很明显
@@ -170,7 +169,7 @@ End Function
 法里,对于Parts类与part对象所属的类又出现了纠缠不清的情况.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;所以我们应当采取隔离措施!更改后的代码如下：&lt;/p&gt;
+&lt;p&gt;所以我们应当采取隔离措施!更改后的代码如下:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Function total()
     total = price * perimeter
@@ -202,10 +201,10 @@ End Function
 
 &lt;h1 id=&#34;embrace-change-4:98c9c7b50c5e1d7551c9be09a8121d19&#34;&gt;Embrace Change 4&lt;/h1&gt;
 
-&lt;p&gt;前面几篇中我们探讨了如何管理外来参数的问题,后面几篇,我们来看看如何跟其他的类合作：总的原则当然是低耦合啦.&lt;/p&gt;
+&lt;p&gt;前面几篇中我们探讨了如何管理外来参数的问题,后面几篇,我们来看看如何跟其他的类合作:总的原则当然是低耦合啦.&lt;/p&gt;
 
 &lt;p&gt;在最初学习时,经常会冒出个想法,前辈们经常都说要低耦合,那干脆不耦合不行吗？
-——不要说我笨哈,这真是我的学习过程,答案公布如下,免得有人跟我一样纠结中：
+——不要说我笨哈,这真是我的学习过程,答案公布如下,免得有人跟我一样纠结中:
 &lt;em&gt;不耦合就谈不上类的组合运用啦!&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;所以耦合是必须的,只是如何减少这种耦合度才是我们要考虑的!&lt;/p&gt;
@@ -213,7 +212,7 @@ End Function
 &lt;p&gt;那如何减少耦合度呢？——只知道应该知道的,不该知道的东西不要知道!
 知道的太多,后果……你懂的!嘿嘿……&lt;/p&gt;
 
-&lt;p&gt;扯了一篇的闲话,下面上重点,来看两个类：&lt;/p&gt;
+&lt;p&gt;扯了一篇的闲话,下面上重点,来看两个类:&lt;/p&gt;
 
 &lt;p&gt;零件（Parts类）:
 它负责计算长方形零件（因为现有公司只生产长方形）的总价,
@@ -275,7 +274,7 @@ End Function
 &#39;……
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;它们之间的合作是这样的：
+&lt;p&gt;它们之间的合作是这样的:
     Dim o As New Parts
     Sub old_parts()
         o.init 2, 3, 4   &amp;lsquo;单价,长,宽
@@ -289,7 +288,7 @@ End Function
 另外Parts类的total方法中,引用了Rects类,那表明它只能计算长方形零件总价了,如果公司产品创新,有了正方形、三角形、圆形等等零件,这个方法就无能为力了.
 当然还有其他问题,我们先关注以上这两点.&lt;/p&gt;
 
-&lt;p&gt;其实对于Parts类来说,它只要知道一个可以响应周长的对象就可以了,所以更改后的代码如下：
+&lt;p&gt;其实对于Parts类来说,它只要知道一个可以响应周长的对象就可以了,所以更改后的代码如下:
     Private pric
     Private part&lt;/p&gt;
 
@@ -309,7 +308,7 @@ End Function
 &#39;其他功能方法……
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;它与Rects类的合作如下所示：
+&lt;p&gt;它与Rects类的合作如下所示:
     Dim o As New Parts
     Dim rect As New Rects&lt;/p&gt;
 
@@ -340,7 +339,7 @@ Parts类现在可以跟任何实现了计算周长方法的零件进行合作了
 
 &lt;h1 id=&#34;embrace-change-3:f261325e8964f5967e8e10de2a5e6155&#34;&gt;Embrace Change 3&lt;/h1&gt;
 
-&lt;p&gt;前两篇中我们都提到了DRY原则,在这篇中,我们正式提出一个口号：&lt;/p&gt;
+&lt;p&gt;前两篇中我们都提到了DRY原则,在这篇中,我们正式提出一个口号:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;从今天起,面朝大海,春暖花开,旗帜鲜明全面推行单一职责原则!&lt;/em&gt;&lt;/p&gt;
@@ -350,7 +349,7 @@ Parts类现在可以跟任何实现了计算周长方法的零件进行合作了
 
 &lt;p&gt;我们这里讨论方法,对于方法我们尽量要能够用一句话来描述它的职责,它是干什么的.&lt;/p&gt;
 
-&lt;p&gt;我们来看一下第二篇中类里提到的一个方法：&lt;/p&gt;
+&lt;p&gt;我们来看一下第二篇中类里提到的一个方法:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Function perimeter()
     For i = 1 To count
@@ -359,12 +358,12 @@ Parts类现在可以跟任何实现了计算周长方法的零件进行合作了
 End Function
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这个方法显然有两项职责：遍历传入的数据,并计算每一个长方形的类周长
+&lt;p&gt;这个方法显然有两项职责:遍历传入的数据,并计算每一个长方形的类周长
 什么叫类周长？——请看&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-02/&#34;&gt;用VBA编写拥抱变化的代码(二)&lt;/a&gt;!&lt;/p&gt;
 
 &lt;p&gt;我们根据单一职责原则把它分解为两个方法,这种重构肯定会带来额外的负
 担,但对于性能如有必要,可在以后加以改善,现在最主要的是编写易于更
-改的代码重构后的代码如下：&lt;/p&gt;
+改的代码重构后的代码如下:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Function perimeters()
     For i = 1 To count
@@ -382,7 +381,7 @@ End Function
 &lt;p&gt;当然象上面这样简单的重构,其影响力是非常小的,但这种编码风格一旦形成,
 累积起来对我们影响是非常巨大的.&lt;/p&gt;
 
-&lt;p&gt;具有单一职责的方法的优点：&lt;/p&gt;
+&lt;p&gt;具有单一职责的方法的优点:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;使类高内聚,我们说类也应该是具有单一职责的,目的性强的,从哪里做起？就是从类中方法做起,每一个短小精悍的方法,对于类会起到一个净化的效果.&lt;/li&gt;
