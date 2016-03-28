@@ -7,8 +7,91 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 28 Mar 2016 11:07:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 28 Mar 2016 11:55:39 +0800</lastBuildDate>
     <atom:link href="http://zhash.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>牛顿-拉夫逊之二分查找方法</title>
+      <link>http://zhash.github.io/post/Newton-Raphson-method/</link>
+      <pubDate>Mon, 28 Mar 2016 11:55:39 +0800</pubDate>
+      
+      <guid>http://zhash.github.io/post/Newton-Raphson-method/</guid>
+      <description>&lt;p&gt;牛顿-拉夫逊法在数学上是求解非线性代数方程组的有效方法。
+其要点是把非线性方程求解过程变成反复地对相应的线性方程进行求解的过程。&lt;/p&gt;
+
+&lt;p&gt;牛顿迭代法(Newton&amp;rsquo;s method)又称为牛顿-拉夫逊方法(Newton-Raphson method)，
+它是牛顿在17世纪提出的一种在实数域和复数域上近似求解方程的方法。多数方程不存
+在求根公式，因此求精确根非常困难，甚至不可能，从而寻找方程的近似根就显得特别重要。
+方法使用函数f(x)的泰勒级数的前面几项来寻找方程f(x) = 0的根。牛顿迭代法是求方程根
+的重要方法之一，其最大优点是在方程f(x) = 0的单根附近具有平方收敛，而且该法还可以用
+来求方程的重根、复根。&lt;/p&gt;
+
+&lt;p&gt;以上这些在我看来都是天书,实事求是的说&amp;mdash;-不懂.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Sub 二分查找()
+  x = 100000
+  epsilon = 0.01
+  count = 0
+  low = 0
+  high = x
+  ans = (high + low) / 2
+
+  Do While Abs(ans * ans - x) &amp;gt;= epsilon
+      count = count + 1
+      If ans * ans &amp;lt; x Then
+          low = ans
+      Else
+          high = ans
+      End If
+      ans = (high + low) / 2
+  Loop
+
+  Debug.Print &amp;quot;查找次数:&amp;quot; &amp;amp; count
+  Debug.Print x &amp;amp; &amp;quot;的近似平方根是&amp;quot; &amp;amp; ans
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面是一个正常二分查找的代码&lt;br /&gt;
+下面再上一个牛顿-拉夫逊方法的代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Sub 牛顿拉夫逊()
+  x = 100000
+  epsilon = 0.01
+  count = 0
+  ans = x / 2
+
+  Do While Abs(ans * ans - x) &amp;gt;= epsilon
+      count = count + 1
+      ans = ans - ((ans * ans - x) / (2 * ans))
+  Loop
+
+  Debug.Print &amp;quot;查找次数:&amp;quot; &amp;amp; count
+  Debug.Print x &amp;amp; &amp;quot;的近似平方根是&amp;quot; &amp;amp; ans
+
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;二分查找的结果是:&lt;br /&gt;
+查找次数:31&lt;br /&gt;
+100000的近似平方根是316.227762959898&lt;/p&gt;
+
+&lt;p&gt;牛顿-拉夫逊的结果是:&lt;br /&gt;
+查找次数:11&lt;br /&gt;
+100000的近似平方根是316.227766020389&lt;/p&gt;
+
+&lt;p&gt;从结果可以得出结论:&lt;br /&gt;
+牛顿方法是更高效的，运算结果是完全可以信赖的。&lt;/p&gt;
+
+&lt;p&gt;我们需要懂得很高深的数学知识吗？——No！&lt;br /&gt;
+我们只要记住这个结论，并对它进行运用就好，&lt;br /&gt;
+整个帖子我只想推荐这一个公式：ans = ans - ((ans * ans - x) / (2 * ans))&lt;br /&gt;
+貌似要用到求导等知识，但我们真没必要去深究。&lt;/p&gt;
+
+&lt;p&gt;实战为王！&lt;/p&gt;
+
+&lt;p&gt;PS：涉及的基础知识不在本帖的介绍范围，有需要的请自行百度。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>用VBA编写拥抱变化的代码(六)</title>
