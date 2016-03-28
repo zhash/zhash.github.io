@@ -7,8 +7,129 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2016, Merty; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 28 Mar 2016 10:33:33 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 28 Mar 2016 11:07:00 +0800</lastBuildDate>
     <atom:link href="http://zhash.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>embrace change with vba 06</title>
+      <link>http://zhash.github.io/post/embrace-change-with-vba-06/</link>
+      <pubDate>Mon, 28 Mar 2016 11:07:00 +0800</pubDate>
+      
+      <guid>http://zhash.github.io/post/embrace-change-with-vba-06/</guid>
+      <description>
+
+&lt;h1 id=&#34;embrace-change-6:490a637e41882e40900fe39068a2c60f&#34;&gt;Embrace Change 6&lt;/h1&gt;
+
+&lt;p&gt;这篇主要聊聊类之间的依赖关系.&lt;/p&gt;
+
+&lt;p&gt;在第四篇中列出的两个类Parts与Rects类
+（这边不再重复列出原有的类代码了,有需要的直接查看：
+[用VBA编写拥抱变化的代码(四)] [EmbraceChange04]）&lt;/p&gt;
+
+&lt;p&gt;它们的合作之前都是Parts类依赖于Rects类,Parts类需要Rects类的perimeter.
+这种依赖关系可以反转的反转后两个类的代码如下：&lt;/p&gt;
+
+&lt;p&gt;Parts类：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Private pric
+
+Property Get price()
+    price = pric
+End Property
+
+Function init(price)
+    pric = price
+End Function
+
+Function total(perimeter)
+    total = price * perimeter
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Rects类：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Private leng
+Private wid
+private part
+
+Property Get length()
+    length = leng
+End Property
+
+Property Get wide()
+    wide = wid
+End Property
+
+Function init(length, wide,p)
+    leng = length
+    wid = wide
+    set part = p
+End Function
+
+Function perimeter()
+    perimeter = (length + wide) * 2
+End Function
+
+Function total()
+    total = part.total(perimeter)
+End Function
+&#39;……
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;它们之间的合作是这样的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Dim o As New Parts
+Dim rect As New Rects
+
+Sub new_parts()
+    o.init 2   &#39;单价
+    rect.init 3, 4,o &#39;长、宽、零件
+    rect.total
+    &#39;……
+End Sub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;两种依赖关系,都能很好的工作,这似乎是说,不管谁靠谁,只要能靠着,就行!
+但现实真的很残酷!&lt;/p&gt;
+
+&lt;p&gt;除非你的代码千年不改、万年不变,那什么都没得说,直接忽略所有文字.&lt;/p&gt;
+
+&lt;p&gt;依赖方向的影响是很深远的,它贯穿在你整个程序生命周期中,随着变动的加剧,
+它们逐渐会成为问题的根源.&lt;/p&gt;
+
+&lt;p&gt;好的依赖方向会让人后续维护代码的工作变得更轻松.&lt;/p&gt;
+
+&lt;p&gt;对于上例来说,比较简单,无论谁依赖谁都是可以的.但碰到复杂点的类之间的合作,
+多个类的合作,依赖关系的选择就需要我们进行深入的研究.我们基于怎样的判断来
+选择呢？没有万全的方法,更多的是靠经验：
+&lt;em&gt;应当依赖那些不容易发生变化的类&lt;/em&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;VBA固有的类,肯定是我们可以依赖的,它们稳定；而外部的类,相对就没有
+那么稳定可靠.&lt;/li&gt;
+&lt;li&gt;抽象类比具体类应该更稳定,对于VBA来说,抽象类就是指接口类了.&lt;/li&gt;
+&lt;li&gt;如果一个类本身就已经拥有许多依赖关系,这时,我们就要慎重对待了,说不定,我们就是那最后一根压垮骆驼的稻草.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以下纯粹无病呻吟,可以忽略……&lt;/p&gt;
+
+&lt;p&gt;不知不觉,接触VBA也有7个年头了,期间也写了许多或难看或幼稚的代码
+（现在懒的时候也经常写）,最常用的基本上就是数组、字典,渐渐都有
+点倦怠,似乎都没什么新意,当然好的东西还有许多,但貌似都是奇技淫巧,
+这些东西貌似等真正需要的时候再去学习也为时不晚（貌似都没有真正需要过）.&lt;/p&gt;
+
+&lt;p&gt;相信大多数长期学习VBA的,都跟我有同样的经历,不经意间接触到了别的
+编程语言,才会真正觉得：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;语言那么多,应该去看看!——OO会带你到达另一个世界——回过头来,你会
+体会到：见山是山,见山不是山,见山还是山的三重境界.对于奇技淫巧你会
+由衷的赞叹,但你只是旁观者；而对于OO,它会改变你的思想,长驻在你的心
+间,你可以随意的按自己的意愿塑造属于自己的OO,沉淀得越久,OO将象空气
+、阳光一样,让你不可或缺了.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     
     <item>
       <title>用VBA编写拥抱变化的代码(五)</title>

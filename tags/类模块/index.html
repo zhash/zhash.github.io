@@ -113,6 +113,19 @@
     
         <article class="post">
     <header>
+      <h2><a href="http://zhash.github.io/post/embrace-change-with-vba-06/">embrace change with vba 06 </a> </h2>
+      <div class="post-meta">Mon, Mar 28, 2016 -  Read in 1 Min </div>
+    </header>
+
+    Embrace Change 6 这篇主要聊聊类之间的依赖关系. 在第四篇中列出的两个类Parts与Rects类 （这边不再重复列出原有的类代码了,有需要的直接查看： [用VBA编写拥抱变化的代码(四)] [EmbraceChange04]） 它们的合作之前都是Parts类依赖于Rects类,Parts类需要Rects类的perimeter. 这种依赖关系可以反转的反转后两个类的代码如下： Parts类： Private pric Property Get price() price = pric End Property Function init(price) pric = price End Function Function total(perimeter) total = price * perimeter End Function Rects类： Private leng Private wid private part Property Get length() length = leng End Property Property Get wide() wide = wid End Property Function init(length, wide,p) leng = length wid = wide set part = p End Function Function perimeter() perimeter = (length + wide) * 2 End Function Function total() total = part.total(perimeter) End Function '…… 它们之间的合作是这样的： Dim o As New Parts Dim rect As New Rects Sub new_parts() o.init 2 '单价 rect.init 3, 4,o '长、宽、零件 rect.total '…… End Sub 两种依赖关系,都能很好的工作,这似乎是说,不管谁靠谁,只要能靠着,就行!
+    <footer>
+        <a href='http://zhash.github.io/post/embrace-change-with-vba-06/'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+    
+        <article class="post">
+    <header>
       <h2><a href="http://zhash.github.io/post/embrace-change-with-vba-05/">用VBA编写拥抱变化的代码(五) </a> </h2>
       <div class="post-meta">Mon, Mar 28, 2016 -  Read in 1 Min </div>
     </header>
