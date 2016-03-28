@@ -125,14 +125,14 @@
 我们不搞大块头,只简单的聊一点轻松的哈,把其中关键点出来,大家一看就明白的那种.</p>
 
 <p>我们来看一下上一篇中改进后的Parts类,具体的所有代码我就不复制了,需要的看
-[前一篇] [EmbraceChange4],里面有一个方法total,相关代码如下：</p>
+<a href="http://zhash.github.io/post/embrace-change-with-vba-04/">前一篇</a>,里面有一个方法total,相关代码如下：</p>
 
 <pre><code>Function total()
     total = price * part.perimeter
 End Function
 </code></pre>
 
-<p>我们在[上一篇] [EmbraceChange4]中说到了,类要尽量的低耦合,知道的越多,重用就越困难.</p>
+<p>我们在<a href="http://zhash.github.io/post/embrace-change-with-vba-04/">上一篇</a>中说到了,类要尽量的低耦合,知道的越多,重用就越困难.</p>
 
 <p>我们看到该方法知道了part对象的perimeter方法,如果Parts类对part.perimeter的
 引用是唯一的,那么这段代码没什么问题.但有的时候,现实总是残酷的,
@@ -169,8 +169,6 @@ End Function
 <p>当然还有其他一些方法也能达到同样的效果,我们有时间再聊哈.</p>
 
 <p>这一篇就先到这了,小菜一碟,供大家品尝哈……</p>
-
-<p>[EmbraceChange4]: <a href="http://zhash.github.io/post/embrace-change-with-vba-04/">http://zhash.github.io/post/embrace-change-with-vba-04/</a></p>
 
         </article>
   </div>
@@ -225,7 +223,7 @@ End Function
 
 </aside>
 
-<meta itemprop="wordCount" content="58">
+<meta itemprop="wordCount" content="54">
 <meta itemprop="datePublished" content="2016-03-28">
 <meta itemprop="url" content="http://zhash.github.io/post/embrace-change-with-vba-05/">
 

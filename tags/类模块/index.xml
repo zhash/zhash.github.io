@@ -24,14 +24,14 @@
 我们不搞大块头,只简单的聊一点轻松的哈,把其中关键点出来,大家一看就明白的那种.&lt;/p&gt;
 
 &lt;p&gt;我们来看一下上一篇中改进后的Parts类,具体的所有代码我就不复制了,需要的看
-[前一篇] [EmbraceChange4],里面有一个方法total,相关代码如下：&lt;/p&gt;
+&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-04/&#34;&gt;前一篇&lt;/a&gt;,里面有一个方法total,相关代码如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Function total()
     total = price * part.perimeter
 End Function
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;我们在[上一篇] [EmbraceChange4]中说到了,类要尽量的低耦合,知道的越多,重用就越困难.&lt;/p&gt;
+&lt;p&gt;我们在&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-04/&#34;&gt;上一篇&lt;/a&gt;中说到了,类要尽量的低耦合,知道的越多,重用就越困难.&lt;/p&gt;
 
 &lt;p&gt;我们看到该方法知道了part对象的perimeter方法,如果Parts类对part.perimeter的
 引用是唯一的,那么这段代码没什么问题.但有的时候,现实总是残酷的,
@@ -68,8 +68,6 @@ End Function
 &lt;p&gt;当然还有其他一些方法也能达到同样的效果,我们有时间再聊哈.&lt;/p&gt;
 
 &lt;p&gt;这一篇就先到这了,小菜一碟,供大家品尝哈……&lt;/p&gt;
-
-&lt;p&gt;[EmbraceChange4]: &lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-04/&#34;&gt;http://zhash.github.io/post/embrace-change-with-vba-04/&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
