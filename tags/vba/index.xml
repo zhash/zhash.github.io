@@ -24,12 +24,14 @@
 我们不搞大块头,只简单的聊一点轻松的哈,把其中关键点出来,大家一看就明白的那种.&lt;/p&gt;
 
 &lt;p&gt;我们来看一下上一篇中改进后的Parts类,具体的所有代码我就不复制了,需要的看
-[前一篇] [EmbraceChange4],里面有一个方法total,相关代码如下：
-    Function total()
-        total = price * part.perimeter
-    End Function&lt;/p&gt;
+[前一篇] [EmbraceChange4],里面有一个方法total,相关代码如下：&lt;/p&gt;
 
-&lt;p&gt;我们在上一篇中说到了,类要尽量的低耦合,知道的越多,重用就越困难.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Function total()
+    total = price * part.perimeter
+End Function
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们在[上一篇] [EmbraceChange4]中说到了,类要尽量的低耦合,知道的越多,重用就越困难.&lt;/p&gt;
 
 &lt;p&gt;我们看到该方法知道了part对象的perimeter方法,如果Parts类对part.perimeter的
 引用是唯一的,那么这段代码没什么问题.但有的时候,现实总是残酷的,
@@ -47,12 +49,13 @@
 法里,对于Parts类与part对象所属的类又出现了纠缠不清的情况.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;所以我们应当采取隔离措施！更改后的代码如下：
-    Function total()
-        total = price * perimeter
-    End Function&lt;/p&gt;
+&lt;p&gt;所以我们应当采取隔离措施!更改后的代码如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Function perimeter()
+&lt;pre&gt;&lt;code&gt;Function total()
+    total = price * perimeter
+End Function
+
+Function perimeter()
     perimeter = part.perimeter
 End Function
 &lt;/code&gt;&lt;/pre&gt;
@@ -80,22 +83,22 @@ End Function
 
 &lt;h1 id=&#34;embrace-change-4:98c9c7b50c5e1d7551c9be09a8121d19&#34;&gt;Embrace Change 4&lt;/h1&gt;
 
-&lt;p&gt;前面几篇中我们探讨了如何管理外来参数的问题，后面几篇，我们来看看如何跟其他的类合作：总的原则当然是低耦合啦。&lt;/p&gt;
+&lt;p&gt;前面几篇中我们探讨了如何管理外来参数的问题,后面几篇,我们来看看如何跟其他的类合作：总的原则当然是低耦合啦.&lt;/p&gt;
 
-&lt;p&gt;在最初学习时，经常会冒出个想法，前辈们经常都说要低耦合，那干脆不耦合不行吗？
-——不要说我笨哈，这真是我的学习过程，答案公布如下，免得有人跟我一样纠结中：
-&lt;em&gt;不耦合就谈不上类的组合运用啦！&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;在最初学习时,经常会冒出个想法,前辈们经常都说要低耦合,那干脆不耦合不行吗？
+——不要说我笨哈,这真是我的学习过程,答案公布如下,免得有人跟我一样纠结中：
+&lt;em&gt;不耦合就谈不上类的组合运用啦!&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;所以耦合是必须的，只是如何减少这种耦合度才是我们要考虑的！&lt;/p&gt;
+&lt;p&gt;所以耦合是必须的,只是如何减少这种耦合度才是我们要考虑的!&lt;/p&gt;
 
-&lt;p&gt;那如何减少耦合度呢？——只知道应该知道的，不该知道的东西不要知道！
-知道的太多，后果……你懂的！嘿嘿……&lt;/p&gt;
+&lt;p&gt;那如何减少耦合度呢？——只知道应该知道的,不该知道的东西不要知道!
+知道的太多,后果……你懂的!嘿嘿……&lt;/p&gt;
 
-&lt;p&gt;扯了一篇的闲话，下面上重点，来看两个类：&lt;/p&gt;
+&lt;p&gt;扯了一篇的闲话,下面上重点,来看两个类：&lt;/p&gt;
 
 &lt;p&gt;零件（Parts类）:
-它负责计算长方形零件（因为现有公司只生产长方形）的总价，
-总价 = 单价 * 零件周长，当然还有其他功能，我们暂时忽略。&lt;/p&gt;
+它负责计算长方形零件（因为现有公司只生产长方形）的总价,
+总价 = 单价 * 零件周长,当然还有其他功能,我们暂时忽略.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Private pric
 Private leng
@@ -161,13 +164,13 @@ End Function
         &amp;lsquo;……
     End Sub&lt;/p&gt;
 
-&lt;p&gt;这两个类，表面看上去似乎挺平常的，但其实暗藏杀机，我们后面一一分解，这篇分解不完，下篇继续分解。&lt;/p&gt;
+&lt;p&gt;这两个类,表面看上去似乎挺平常的,但其实暗藏杀机,我们后面一一分解,这篇分解不完,下篇继续分解.&lt;/p&gt;
 
-&lt;p&gt;首先一个耦合是Parts类的，知道了Rects类的名字，如果Rects类的名称改变，相应的Parts类也要改变了。
-另外Parts类的total方法中，引用了Rects类，那表明它只能计算长方形零件总价了，如果公司产品创新，有了正方形、三角形、圆形等等零件，这个方法就无能为力了。
-当然还有其他问题，我们先关注以上这两点。&lt;/p&gt;
+&lt;p&gt;首先一个耦合是Parts类的,知道了Rects类的名字,如果Rects类的名称改变,相应的Parts类也要改变了.
+另外Parts类的total方法中,引用了Rects类,那表明它只能计算长方形零件总价了,如果公司产品创新,有了正方形、三角形、圆形等等零件,这个方法就无能为力了.
+当然还有其他问题,我们先关注以上这两点.&lt;/p&gt;
 
-&lt;p&gt;其实对于Parts类来说，它只要知道一个可以响应周长的对象就可以了，所以更改后的代码如下：
+&lt;p&gt;其实对于Parts类来说,它只要知道一个可以响应周长的对象就可以了,所以更改后的代码如下：
     Private pric
     Private part&lt;/p&gt;
 
@@ -199,12 +202,12 @@ End Function
 End Sub
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;将Rects类的实例创建移动到Parts类外部，能将这两个类解耦出来，
-Parts类现在可以跟任何实现了计算周长方法的零件进行合作了。
-这一点能够在VBA中较为方便的实现，依赖于VBA是一种弱类型的语言，
-变量不需要强制事先声明是哪个类型，它能根据实际需要自动进行切换。&lt;/p&gt;
+&lt;p&gt;将Rects类的实例创建移动到Parts类外部,能将这两个类解耦出来,
+Parts类现在可以跟任何实现了计算周长方法的零件进行合作了.
+这一点能够在VBA中较为方便的实现,依赖于VBA是一种弱类型的语言,
+变量不需要强制事先声明是哪个类型,它能根据实际需要自动进行切换.&lt;/p&gt;
 
-&lt;p&gt;好吧，这篇就告一段落了，这篇中还有一些问题，我们留到下一篇中继续分析。&lt;/p&gt;
+&lt;p&gt;好吧,这篇就告一段落了,这篇中还有一些问题,我们留到下一篇中继续分析.&lt;/p&gt;
 </description>
     </item>
     
@@ -218,15 +221,15 @@ Parts类现在可以跟任何实现了计算周长方法的零件进行合作了
 
 &lt;h1 id=&#34;embrace-change-3:f261325e8964f5967e8e10de2a5e6155&#34;&gt;Embrace Change 3&lt;/h1&gt;
 
-&lt;p&gt;前两篇中我们都提到了DRY原则，在这篇中，我们正式提出一个口号：&lt;/p&gt;
+&lt;p&gt;前两篇中我们都提到了DRY原则,在这篇中,我们正式提出一个口号：&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;从今天起，面朝大海，春暖花开，旗帜鲜明全面推行单一职责原则！&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;从今天起,面朝大海,春暖花开,旗帜鲜明全面推行单一职责原则!&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;不管是类还是方法，单一职责的思想都有着重要的意义。&lt;/p&gt;
+&lt;p&gt;不管是类还是方法,单一职责的思想都有着重要的意义.&lt;/p&gt;
 
-&lt;p&gt;我们这里讨论方法，对于方法我们尽量要能够用一句话来描述它的职责，它是干什么的。&lt;/p&gt;
+&lt;p&gt;我们这里讨论方法,对于方法我们尽量要能够用一句话来描述它的职责,它是干什么的.&lt;/p&gt;
 
 &lt;p&gt;我们来看一下第二篇中类里提到的一个方法：&lt;/p&gt;
 
@@ -237,11 +240,11 @@ Parts类现在可以跟任何实现了计算周长方法的零件进行合作了
 End Function
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这个方法显然有两项职责：遍历传入的数据，并计算每一个长方形的类周长
-什么叫类周长？——请看&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-02/&#34;&gt;用VBA编写拥抱变化的代码(二)&lt;/a&gt;！&lt;/p&gt;
+&lt;p&gt;这个方法显然有两项职责：遍历传入的数据,并计算每一个长方形的类周长
+什么叫类周长？——请看&lt;a href=&#34;http://zhash.github.io/post/embrace-change-with-vba-02/&#34;&gt;用VBA编写拥抱变化的代码(二)&lt;/a&gt;!&lt;/p&gt;
 
-&lt;p&gt;我们根据单一职责原则把它分解为两个方法，这种重构肯定会带来额外的负
-担，但对于性能如有必要，可在以后加以改善，现在最主要的是编写易于更
+&lt;p&gt;我们根据单一职责原则把它分解为两个方法,这种重构肯定会带来额外的负
+担,但对于性能如有必要,可在以后加以改善,现在最主要的是编写易于更
 改的代码重构后的代码如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Function perimeters()
@@ -255,18 +258,18 @@ Private Function perimeter(tall As Taller)
 End Function
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;将这种迭代动作分离出来，是一种常见的很容易识别出来的多职责情形。&lt;/p&gt;
+&lt;p&gt;将这种迭代动作分离出来,是一种常见的很容易识别出来的多职责情形.&lt;/p&gt;
 
-&lt;p&gt;当然象上面这样简单的重构，其影响力是非常小的，但这种编码风格一旦形成，
-累积起来对我们影响是非常巨大的。&lt;/p&gt;
+&lt;p&gt;当然象上面这样简单的重构,其影响力是非常小的,但这种编码风格一旦形成,
+累积起来对我们影响是非常巨大的.&lt;/p&gt;
 
 &lt;p&gt;具有单一职责的方法的优点：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;使类高内聚，我们说类也应该是具有单一职责的，目的性强的，从哪里做起？就是从类中方法做起，每一个短小精悍的方法，对于类会起到一个净化的效果。&lt;/li&gt;
-&lt;li&gt;替代注释，单一职责的方法可读性好，可以避免大量的注释，这些陈腐的注释，我已见过许多，都是陷阱。&lt;/li&gt;
-&lt;li&gt;编码风格的传承，后续维护你代码的程序员会按照你的编码风格进行维护。&lt;/li&gt;
-&lt;li&gt;最重要的一点，毫无疑问这种单一职责的方法是易于修改，更易于拥抱变化的。&lt;/li&gt;
+&lt;li&gt;使类高内聚,我们说类也应该是具有单一职责的,目的性强的,从哪里做起？就是从类中方法做起,每一个短小精悍的方法,对于类会起到一个净化的效果.&lt;/li&gt;
+&lt;li&gt;替代注释,单一职责的方法可读性好,可以避免大量的注释,这些陈腐的注释,我已见过许多,都是陷阱.&lt;/li&gt;
+&lt;li&gt;编码风格的传承,后续维护你代码的程序员会按照你的编码风格进行维护.&lt;/li&gt;
+&lt;li&gt;最重要的一点,毫无疑问这种单一职责的方法是易于修改,更易于拥抱变化的.&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
